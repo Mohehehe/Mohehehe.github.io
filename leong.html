@@ -1,0 +1,2192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0055)https://hyoka.ofc.kyushu-u.ac.jp/html/100020218_ja.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta content="text/css" http-equiv="Content-Style-Type">
+<meta content="IE=edge" http-equiv="x-ua-compatible">
+<meta content="width=device-width,initial-scale=1.0" name="viewport">
+<meta content="no-cache" http-equiv="Pragma">
+<meta content="no-cache" http-equiv="Cache-Control">
+<meta content="NOARCHIVE" name="ROBOTS">
+<title>研究者詳細 - 梁 逸偉</title>
+<link href="./leong_files/all.min.css" type="text/css" rel="stylesheet">
+<link href="./leong_files/bootstrap.min.css" type="text/css" rel="stylesheet">
+<link href="./leong_files/style.css" type="text/css" rel="stylesheet">
+<link href="./leong_files/soran.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" defer="" async="" src="./leong_files/piwik.js.ダウンロード"></script><script src="./leong_files/jquery.js.ダウンロード" type="text/javascript" language="javascript"> </script>
+<script src="./leong_files/popper.js.ダウンロード" type="text/javascript" language="javascript"> </script>
+<script src="./leong_files/bootstrap.min.js.ダウンロード" type="text/javascript" language="javascript"> </script>
+<script src="./leong_files/responsive.js.ダウンロード" type="text/javascript" language="javascript"> </script>
+<script type="text/javascript">
+          <!--
+        
+          
+          jQuery.noConflict();
+          jQuery(function() {
+            jQuery('.hidden_detail').toggle();
+           
+           // メニュー閉処理 .dropdown-menu a は閉じる 
+           jQuery('.dropdown-menu a').on('click', function () {
+             jQuery('.navbar-collapse').collapse('hide');
+            });
+           jQuery('#menuClose').on('click', function () {
+             jQuery('.navbar-collapse').collapse('hide');
+           });
+           
+           var pagetop = jQuery('#page_top');   
+           pagetop.hide();
+           jQuery(window).scroll(function () {
+           if (jQuery(this).scrollTop() > 100) {  //100pxスクロールしたら表示
+               pagetop.fadeIn();
+           } else {
+              pagetop.fadeOut();
+           }
+          });
+           pagetop.on('click', function () {
+           jQuery('body,html').animate({
+               scrollTop: 0
+           }, 500); //0.5秒かけてトップへ移動
+              return false;
+           });
+           
+           
+            jQuery('.open_button_ja').on('click',function(){
+              var buttonName = jQuery(this).text();
+              changeDetail(jQuery(this).attr('id'));
+              if(buttonName.indexOf('全件表示') > -1){
+                  jQuery(this).text('▲一部表示に戻す');
+              }else{
+                  jQuery(this).text('▼全件表示');
+              }
+            });
+            jQuery('.open_button_en').on('click',function(){
+              var buttonName = jQuery(this).text();
+              changeDetail(jQuery(this).attr('id'));
+              if(buttonName.indexOf('display all') > -1){
+                  jQuery(this).text('▲display part');
+              }else{
+                  jQuery(this).text('▼display all');
+              }
+            });
+            function changeDetail(labelName) {
+              jQuery('#' + labelName).children('ul').children('.hidden_detail').toggle();
+            }
+
+            // 左メニューの+/-記号
+            jQuery('#sidebar .side-group').on('click', function () {
+              if (!jQuery(this).attr('data-toggle')) {
+                return;
+              };
+              // 連打対策
+              if (!jQuery(this).parents('ul').parent().children('ul').hasClass("collapsing")){
+                jQuery('#sidebar .fa-minus').toggleClass("fa-plus").toggleClass("fa-minus");
+                if (!jQuery(this).parents('ul').parent().children('.collapse').hasClass('show')){
+                  jQuery(this).children('.fa-plus').toggleClass("fa-plus").toggleClass("fa-minus");
+                }
+              };
+            });
+          
+          });
+
+
+          function init()
+          {
+
+            doHighlightForSearchKeyword();
+
+          }
+          
+
+          // 検索ワードのハイライト処理
+          function doHighlightForSearchKeyword() {
+          
+            // 検索ワードを解析
+            const url = new URL(window.location.href);
+            const params = new URLSearchParams(url.search);
+            const keyword = params.get('k');
+            
+            if (!keyword) return; // 検索ワードがない場合は終了
+            
+            const decodedKeyword = decodeURIComponent(keyword);
+            const keywords = decodedKeyword.split(/[\u3000\s]+/).filter(function(k) {
+			  return k.trim() !== ""; // 空要素は除外 
+			});
+            
+            // ワードの長い順でソート
+			keywords.sort(function(a, b) {
+			  return b.length - a.length;
+			});            
+      
+            // 取得した要素に対して処理を実行
+            const targetElements = document.querySelectorAll('.contents, .title, .titleNonBold');
+            
+			targetElements.forEach(function (element, index) {
+			  keywords.forEach(function (keyword, index) {
+			    highlightText(element, keyword);
+			  });
+			});            
+          }
+          
+          // ハイライト処理（再帰）
+          function highlightText(node, keyword) {
+            if (node.nodeType === 3) {  // Node.TEXT_NODE
+              const regex = new RegExp(`(${keyword})`, "gi"); // 大文字小文字を無視して一致させる
+              const parentNode = node.parentNode;
+              const text = node.textContent;
+      
+              if (regex.test(text)) {
+              
+                const newHtml = text.replace(regex, '<mark>$1</mark>');
+                const tempElement = document.createElement('span');
+                tempElement.innerHTML = newHtml;
+      
+                // ノードを置き換える
+                parentNode.replaceChild(tempElement, node);
+              }
+            } else if(node.nodeType === 1) { // Node.ELEMENT_NODE
+            
+			  if (node.classList) {
+			  	if(node.classList.contains("text-secondary") // 見出しは対象外
+			  		|| node.classList.contains("fa-external-link-alt") ) { // 外部リンク名称は対象外
+			      return;
+			    }
+			  }             
+            
+              // 子ノードを再帰的に処理
+              node.childNodes.forEach(function (child) {
+				highlightText(child, keyword);
+			  });
+            }
+          }          
+
+          
+          // 概要項目の表示・非表示の切り替え
+                    function toggleAccordion(gaiyoDetailId, gaiyoIconId) {
+                        var detailClasses = window.document.getElementById(gaiyoDetailId).classList;
+                        var iconClasses = window.document.getElementById(gaiyoIconId).classList;
+                        if (detailClasses.contains("is-none-disp-gaiyo")) {
+                            detailClasses.remove("is-none-disp-gaiyo");
+                            detailClasses.add("is-disp-gaiyo");
+                            iconClasses.remove("fa-caret-right");
+                            iconClasses.add("fa-caret-down");
+                        } else {
+                            detailClasses.add("is-none-disp-gaiyo");
+                            detailClasses.remove("is-disp-gaiyo");
+                            iconClasses.add("fa-caret-right");
+                            iconClasses.remove("fa-caret-down");
+                        }
+                    }
+                    
+                    // 著者項目の表示・非表示の切り替え
+          function toggleChosha(choshaDetailId, actionType) {
+            if(actionType == 'close'){
+              window.document.getElementById(choshaDetailId + '_close').removeAttribute("hidden");
+              window.document.getElementById(choshaDetailId + '_open').setAttribute("hidden", false);
+            } else if(actionType == 'open'){
+              window.document.getElementById(choshaDetailId + '_open').removeAttribute("hidden");
+              window.document.getElementById(choshaDetailId + '_close').setAttribute("hidden", false);
+            }
+          }
+
+          function changeDivDispSub(labelname, setval)
+          {
+            var divplus = window.document.getElementById(labelname + "_div_plus");
+            var divminus = window.document.getElementById(labelname + "_div_minus");
+            var inutelements = window.document.getElementsByName(labelname + "_hid");
+
+            if (divplus != null && divminus != null && inutelements != null) {
+              var inputobj = inutelements.item(0);
+              if(setval == "1") {
+                divplus.style.display = "none";
+                divminus.style.display = "block";
+                inputobj.value = "1";
+              } else {
+                divplus.style.display = "block";
+                divminus.style.display = "none";
+                inputobj.value = "0";
+              }
+            }
+          }
+
+          function jumpDivDispSub(labelname, setval)
+          {
+            var divplus = window.document.getElementById(labelname + "_div_plus");
+            var divminus = window.document.getElementById(labelname + "_div_minus");
+            var inutelements = window.document.getElementsByName(labelname + "_hid");
+
+            if (divplus != null && divminus != null && inutelements != null) {
+              var inputobj = inutelements.item(0);
+              if(setval == "1") {
+                divplus.style.display = "none";
+                divminus.style.display = "block";
+                inputobj.value = "1";
+              } else {
+                divplus.style.display = "block";
+                divminus.style.display = "none";
+                inputobj.value = "0";
+              }
+
+              if (window.document.getElementById(labelname + "_2") != null){
+                              if (isSmartPhone()) {
+                                  hideMobileMenu();
+                              }
+                location.hash = "";
+                location.hash = labelname + "_2";
+              }
+            }
+          }
+          function jumpDiv(labelname){
+            var div = window.document.getElementById(labelname);
+            if (div != null){
+                          if (isSmartPhone()) {
+                              hideMobileMenu();
+                          }
+              location.hash = "";
+              location.hash = labelname
+            } 
+          }
+
+          function checkElement(labelname)
+          {
+            if (window.document.getElementById(labelname + "_div_plus") == null) {
+              return false;
+            }
+            else {
+              return true;
+            }
+          }
+          
+          
+    jQuery.ajax(
+      "/html/messages/100020218_ja.html"
+    ).done(function(){
+      var object = document.getElementById("top-message");
+      object.onload = function () {
+        var objectPre = object.contentDocument.body;
+        object.style.height = (objectPre.offsetHeight+25) + "px";
+      };
+    }).fail(function(){
+      window.document.getElementById("item_message_div_minus").style.display = "none";
+    })
+  
+          -->
+        </script>
+<script xmlns="" type="text/javascript">
+		  var _paq = _paq || [];
+		  _paq.push(['setCustomVariable', 1, 'ページ表示言語', 'ja', 'page']);
+		  
+			_paq.push(['setCustomVariable', 2, '研究者名', '梁 逸偉（id:100020218）', 'page']);
+			_paq.push(['setCustomVariable', 3, '所属組織名', '九州大学 工学研究院 応用化学部門', 'page']),
+			_paq.push(['setCustomVariable', 5, '制御情報', 'ja|100020218|梁 逸偉|0000000|九州大学|0000060|工学研究院|0000340|応用化学部門||||', 'page']);
+		  
+		  _paq.push(["trackPageView"]);
+		  _paq.push(["enableLinkTracking"]);
+
+		  (function() {
+		    
+		    if (document.location.hostname.match(/^(127\.|169\.254\.|192\.168|10\.|172\.(1[6-9]|2[0-9]|3[01])\.)/)) {
+		      return;
+		    }
+		    var u="https://webanalytics.sra-tohoku.jp/piwik/";
+		    _paq.push(["setTrackerUrl", u+"piwik.php"]);
+		    _paq.push(["setSiteId", "27"]);
+		    var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0]; g.type="text/javascript";
+		    g.defer=true; g.async=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
+		  })();
+		</script>
+</head>
+<body onload="javascript:init()">
+<div id="wrapper" class="container-fluid pr-lg-5 pl-lg-5 pr-3 pl-3 pt-3">
+<div id="header">
+<div class="row">
+<div class="col-lg-12 d-none d-lg-block">
+<a href="https://hyoka.ofc.kyushu-u.ac.jp/index-j.jsp" id="text-decoration-none">
+<span class="soran-title-ja float-left">九州大学 研究者情報</span>
+</a>
+<a href="https://www.kyushu-u.ac.jp/ja/" id="text-decoration-none" class="float-right">
+<img alt="九州大学HPへ" src="./leong_files/ksu_logo2.png" class="img-fluid">
+</a>
+<div class="title title-lang-tablet">
+<div>
+<p>研究者詳細</p>
+<ul>
+<li class="home__link">
+<a href="https://hyoka.ofc.kyushu-u.ac.jp/index-j.jsp">ホーム</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="header-bar btn-group">
+<label class="btn radio-btn active">
+<a href="https://hyoka.ofc.kyushu-u.ac.jp/html/100020218_ja.html#">日本語</a>
+</label>
+<label class="btn radio-btn">
+<a href="https://hyoka.ofc.kyushu-u.ac.jp/html/100020218_en.html">English</a>
+</label>
+</div>
+</div>
+<div class="col-12 d-block d-lg-none ml-3 detail-icon-block-min-height">
+<a href="https://hyoka.ofc.kyushu-u.ac.jp/index-j.jsp" id="text-decoration-none">
+<span class="soran-title-ja">九州大学 研究者情報</span>
+</a>
+<nav class="col-12 navbar fixed-top">
+<div>
+<span>
+</span></div>
+<button aria-label="Detail Navigation" aria-expanded="false" aria-controls="navbarNavDropdown" data-target="#dropdownMenuList" data-toggle="collapse" class="btn float-right soran-btn-menu-color nav-item" type="button">
+<i class="navbar-toggler-icon dropdown-toggler-icon">
+<span>
+</span></i>
+<div class="soran-btn-menu-font">メニュー</div>
+</button>
+<div id="dropdownMenuList" class="collapse navbar-collapse">
+<ul class="nav navbar-nav">
+<div class="border bg-light">
+<li class="border-bottom">
+<a href="https://hyoka.ofc.kyushu-u.ac.jp/html/100020218_en.html" class="dropdown-item py-2">
+<span id="soran-menu-item-font">English Page</span>
+</a>
+</li>
+<li class="border-bottom">
+<a href="https://www.kyushu-u.ac.jp/ja/" class="dropdown-item py-2">
+<span id="soran-menu-item-font">九州大学HPへ</span>
+</a>
+</li>
+<li class="">
+<a href="https://hyoka.ofc.kyushu-u.ac.jp/index-j.jsp" class="dropdown-item py-2">
+<span id="soran-menu-item-font">ホームへ</span>
+</a>
+</li>
+</div>
+<li class="border-bottom border-white">
+<a aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" role="button" id="soran-menu-item-text-color" href="https://hyoka.ofc.kyushu-u.ac.jp/html/100020218_ja.html#" class="nav-link dropdown-toggle">
+<span class="fa fa-user pl-3 pr-3">
+                基本情報 ▼
+              </span></a>
+<div aria-labelledby="navbarDropdown" class="dropdown-menu bg-light">
+<a href="javascript:jumpDiv(&#39;contents&#39;);" class="dropdown-item">
+<span id="soran-menu-symbol-item-font">◆</span>
+<span id="soran-menu-item-font">基本情報</span>
+</a>
+<a href="javascript:jumpDivDispSub(&#39;item_kaknh_bnrui&#39;, 1);" class="dropdown-item">
+<span id="soran-menu-symbol-item-font">◆</span>
+<span id="soran-menu-item-font">研究分野</span>
+</a>
+<a href="javascript:jumpDivDispSub(&#39;item_shutk_gakui&#39;, 1);" class="dropdown-item">
+<span id="soran-menu-symbol-item-font">◆</span>
+<span id="soran-menu-item-font">学位</span>
+</a>
+<a href="javascript:jumpDivDispSub(&#39;item_gkgai_rykrk&#39;, 1);" class="dropdown-item">
+<span id="soran-menu-symbol-item-font">◆</span>
+<span id="soran-menu-item-font">経歴</span>
+</a>
+<a href="javascript:jumpDivDispSub(&#39;item_univ&#39;, 1);" class="dropdown-item">
+<span id="soran-menu-symbol-item-font">◆</span>
+<span id="soran-menu-item-font">学歴</span>
+</a>
+</div>
+</li>
+<li class="border-bottom border-white">
+<a aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" role="button" id="soran-menu-item-text-color" href="https://hyoka.ofc.kyushu-u.ac.jp/html/100020218_ja.html#" class="nav-link dropdown-toggle">
+<span class="fa fa-flask pl-3 pr-3">
+                研究活動 ▼
+              </span></a>
+<div aria-labelledby="navbarDropdown" class="dropdown-menu bg-light">
+<a href="javascript:jumpDivDispSub(&#39;item_kenkyu_keyword&#39;, 1);" class="dropdown-item">
+<span id="soran-menu-symbol-item-font">◆</span>
+<span id="soran-menu-item-font">研究テーマ・研究キーワード</span>
+</a>
+<a href="javascript:jumpDivDispSub(&#39;item_jusho&#39;, 1);" class="dropdown-item">
+<span id="soran-menu-symbol-item-font">◆</span>
+<span id="soran-menu-item-font">受賞</span>
+</a>
+<a href="javascript:jumpDivDispSub(&#39;item_ronbn&#39;, 1);" class="dropdown-item">
+<span id="soran-menu-symbol-item-font">◆</span>
+<span id="soran-menu-item-font">論文</span>
+</a>
+<a href="javascript:jumpDivDispSub(&#39;item_sosetu&#39;, 1);" class="dropdown-item">
+<span id="soran-menu-symbol-item-font">◆</span>
+<span id="soran-menu-item-font">MISC</span>
+</a>
+<a href="javascript:jumpDivDispSub(&#39;item_szk_gkkai&#39;, 1);" class="dropdown-item">
+<span id="soran-menu-symbol-item-font">◆</span>
+<span id="soran-menu-item-font">所属学協会</span>
+</a>
+<a href="javascript:jumpDivDispSub(&#39;item_kaknh_get&#39;, 1);" class="dropdown-item">
+<span id="soran-menu-symbol-item-font">◆</span>
+<span id="soran-menu-item-font">共同研究・競争的資金等の研究課題</span>
+</a>
+</div>
+</li>
+<li class="border-bottom border-white">
+<a aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" role="button" id="soran-menu-item-text-color" href="https://hyoka.ofc.kyushu-u.ac.jp/html/100020218_ja.html#" class="nav-link dropdown-toggle">
+<span class="fa fa-graduation-cap pl-3 pr-3">
+                教育活動 ▼
+              </span></a>
+<div aria-labelledby="navbarDropdown" class="dropdown-menu bg-light">
+<a href="javascript:jumpDivDispSub(&#39;item_jugyo_kamoku&#39;, 1);" class="dropdown-item">
+<span id="soran-menu-symbol-item-font">◆</span>
+<span id="soran-menu-item-font">担当授業科目</span>
+</a>
+</div>
+</li>
+<li>
+<button id="menuClose" class="close" type="button">×</button>
+</li>
+</ul>
+</div>
+</nav>
+</div>
+</div>
+</div>
+<div id="mobile-lastModified" class="col-lg-12 d-block d-lg-none">
+<p class="date">2024/10/02 更新</p>
+</div>
+<div id="page_top" style="display: none;">
+<a href="https://hyoka.ofc.kyushu-u.ac.jp/html/100020218_ja.html#">
+<span>
+</span></a>
+</div>
+<div id="contents" class="d-flex col-lg-12 pt-lg-3 mt-2 pr-0 pl-0">
+<div id="sidebar" class="d-none d-lg-block col-lg-2 pl-0">
+<div class="data">
+<div style="display:block;" id="sub_basic_div_minus">
+<ul style="margin-bottom: 5px;">
+<li style="cursor: pointer;" data-target="#sidebar_menu_basic" data-toggle="collapse" class="side-group">
+<div style="float: left; margin-top: 7px; margin-left: -4px; " class="fa fa-minus">
+<span>
+</span></div>
+<div>
+<p class="d-flex">
+<span class="fa fa-user pt-1">　</span>基本情報</p>
+</div>
+</li>
+</ul>
+<ul data-parent="#sidebar" class="collapse show" id="sidebar_menu_basic">
+<li class="side-contents">
+<div class="point">◆</div>
+<p>
+<a href="javascript:jumpDiv(&#39;contents&#39;);">基本情報</a>
+</p>
+</li>
+<li class="side-contents">
+<div class="point">◆</div>
+<p>
+<a href="javascript:jumpDivDispSub(&#39;item_kaknh_bnrui&#39;, 1);">
+  研究分野
+  </a>
+</p>
+</li>
+<li class="side-contents">
+<div class="point">◆</div>
+<p>
+<a href="javascript:jumpDivDispSub(&#39;item_shutk_gakui&#39;, 1);">
+  学位
+  </a>
+</p>
+</li>
+<li class="side-contents">
+<div class="point">◆</div>
+<p>
+<a href="javascript:jumpDivDispSub(&#39;item_gkgai_rykrk&#39;, 1);">
+  経歴
+  </a>
+</p>
+</li>
+<li class="side-contents">
+<div class="point">◆</div>
+<p>
+<a href="javascript:jumpDivDispSub(&#39;item_univ&#39;, 1);">
+  学歴
+  </a>
+</p>
+</li>
+</ul>
+</div>
+<div style="display:block;" id="sub_research_div_minus">
+<ul style="margin-bottom: 5px;">
+<li style="cursor: pointer;" data-target="#sidebar_menu_research" data-toggle="collapse" class="side-group">
+<div style="float: left; margin-top: 7px; margin-left: -4px; " class="fa fa-plus">
+<span>
+</span></div>
+<p class="d-flex">
+<span class="fa fa-flask pt-1">　</span>研究活動</p>
+</li>
+</ul>
+<ul data-parent="#sidebar" class="collapse" id="sidebar_menu_research">
+<li class="side-contents">
+<div class="point">◆</div>
+<p>
+<a href="javascript:jumpDivDispSub(&#39;item_kenkyu_keyword&#39;, 1);">
+  研究テーマ・研究キーワード
+  </a>
+</p>
+</li>
+<li class="side-contents">
+<div class="point">◆</div>
+<p>
+<a href="javascript:jumpDivDispSub(&#39;item_jusho&#39;, 1);">
+  受賞
+  </a>
+</p>
+</li>
+<li class="side-contents">
+<div class="point">◆</div>
+<p>
+<a href="javascript:jumpDivDispSub(&#39;item_ronbn&#39;, 1);">
+  論文
+  </a>
+</p>
+</li>
+<li class="side-contents">
+<div class="point">◆</div>
+<p>
+<a href="javascript:jumpDivDispSub(&#39;item_sosetu&#39;, 1);">
+  MISC
+  </a>
+</p>
+</li>
+<li class="side-contents">
+<div class="point">◆</div>
+<p>
+<a href="javascript:jumpDivDispSub(&#39;item_szk_gkkai&#39;, 1);">
+  所属学協会
+  </a>
+</p>
+</li>
+<li class="side-contents">
+<div class="point">◆</div>
+<p class="fix-width">
+<a href="javascript:jumpDivDispSub(&#39;item_kaknh_get&#39;, 1);">
+  共同研究・競争的資金等の研究課題
+  </a>
+</p>
+</li>
+</ul>
+</div>
+<div style="display:block;" id="sub_education_div_minus">
+<ul style="margin-bottom: 5px;">
+<li style="cursor: pointer;" data-target="#sidebar_menu_education" data-toggle="collapse" class="side-group">
+<div style="float: left; margin-top: 7px; margin-left: -4px; " class="fa fa-plus">
+<span>
+</span></div>
+<p class="d-flex">
+<span class="fa fa-graduation-cap pt-1">　</span>教育活動</p>
+</li>
+</ul>
+<ul data-parent="#sidebar" class="collapse" id="sidebar_menu_education">
+<li class="side-contents">
+<div class="point">◆</div>
+<p>
+<a href="javascript:jumpDivDispSub(&#39;item_jugyo_kamoku&#39;, 1);">
+  担当授業科目
+  </a>
+</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="date">2024/10/02 更新</p>
+</div>
+<div id="main" class="col-lg-10 col-sm-12">
+<div style="display:block;" id="inf_basic_div_minus">
+<div class="text">
+<div style="display:none;" id="item_message_div_plus">
+<input value="1" name="item_message_hid" type="hidden">
+<h3 id="item_message_1">
+<span class="left">
+  お知らせ
+</span>
+</h3>
+</div>
+<div style="display: none;" id="item_message_div_minus">
+<h3 id="item_message_2">
+<span class="left">
+  お知らせ
+</span>
+</h3>
+<div class="cv_item_frame ml-lg-4" id="message">
+<object height="100%" width="100%" type="text/html" data="./leong_files/100020218_ja.html">
+     &nbsp;
+  </object>
+</div>
+</div>
+</div>
+<div style="display:none;" id="inf_basic_div_plus">
+<input value="1" name="inf_basic_hid" type="hidden">
+</div>
+<div style="display:block;" id="inf_basic_div_minus">
+<div class="photo_name">
+<div class="photo">
+<p class="p-md-1 ml-1 mb-1">
+<img class="photo" alt="写真a" src="./leong_files/100020218">
+</p>
+</div>
+<div class="psn-name titleNonBold">
+<div class="name-kna">リヨウ　イツワイ</div>
+<div class="name-gng">梁 逸偉</div>
+<div class="name-rmn">LEONG IAT WAI</div>
+</div>
+</div>
+<div>
+<div class="text">
+<div class="cv_item_frame">
+<div class="psninfo-row d-md-flex">
+<div class="col-12 col-md-2 psninfo-rowtext-color psninfo-rowtext-size">所属</div>
+<div class="col-12 col-md-10 psninfo-rowtext-size titleNonBold">工学研究院 応用化学部門 助教<br>
+工学部 応用化学科<span class="text-secondary">（併任）</span>
+
+</div>
+</div>
+<div class="psninfo-row d-none">
+<div class="col-12 col-md-2 psninfo-rowtext-color psninfo-rowtext-size">職名</div>
+<div class="col-12 col-md-10 psninfo-rowtext-size titleNonBold">助教</div>
+</div>
+<div class="psninfo-row d-md-flex">
+<div class="col-12 col-md-2 psninfo-rowtext-color psninfo-rowtext-size">連絡先</div>
+<div class="col-12 col-md-10 psninfo-rowtext-size">
+<img alt="メールアドレス" src="./leong_files/100020218.png" class="mail-image">
+</div>
+</div>
+<div class="psninfo-row d-md-flex">
+<div class="col-12 col-md-2 psninfo-rowtext-color psninfo-rowtext-size">
+  ホームページ
+  </div>
+<div class="col-12 col-md-10 psninfo-rowtext-size" id="homepage">
+<ul>
+<li>
+<span class="contents">
+<a href="https://sites.google.com/view/kaji-research-group/" target="_blank">https://sites.google.com/view/kaji-research-group/</a>
+</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="psninfo-row d-md-flex">
+<div class="col-12 col-md-2 psninfo-rowtext-color psninfo-rowtext-size">外部リンク</div>
+<div class="col-12 col-md-10 psninfo-rowtext-size">
+<ul class="banner">
+<li>
+<a style="padding-right:20px;" class="external-db-link" target="_blank" href="https://researchmap.jp/IWLeong?lang=ja">
+<img src="./leong_files/researchmap_link.gif">
+</a>
+</li>
+<li>
+<a class="external-db-link" target="_blank" href="https://orcid.org/0000-0002-9100-495X">
+<img class="no-border" src="./leong_files/orcid-logo.png"> ORCID
+                      <span class="external-db-text">&nbsp;https://orcid.org/0000-0002-9100-495X</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="text">
+<div style="display:none;" id="item_kaknh_bnrui_div_plus">
+<input value="1" name="item_kaknh_bnrui_hid" type="hidden">
+<h3 id="item_kaknh_bnrui_1">
+<span class="left">
+  研究分野
+  </span>
+</h3>
+</div>
+<div style="display:block;" id="item_kaknh_bnrui_div_minus">
+<h3 id="item_kaknh_bnrui_2">
+<span class="left">
+  研究分野
+  </span>
+</h3>
+<div class="cv_item_frame ml-lg-4" id="kaknh_bnrui">
+<ul>
+<li>
+<p class="contents">ナノテク・材料 / 分析化学</p>
+</li>
+<li>
+<p class="contents">ナノテク・材料 / ナノマイクロシステム</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="text">
+<div style="display:none;" id="item_shutk_gakui_div_plus">
+<input value="1" name="item_shutk_gakui_hid" type="hidden">
+<h3 id="item_shutk_gakui_1">
+<span class="left">
+  学位
+  </span>
+</h3>
+</div>
+<div style="display:block;" id="item_shutk_gakui_div_minus">
+<h3 id="item_shutk_gakui_2">
+<span class="left">
+  学位
+  </span>
+</h3>
+<div class="cv_item_frame ml-lg-4" id="shutk_gakui">
+<ul>
+<li>
+<p class="contents">博士(理学)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="text">
+<div style="display:none;" id="item_gkgai_rykrk_div_plus">
+<input value="1" name="item_gkgai_rykrk_hid" type="hidden">
+<h3 id="item_gkgai_rykrk_1">
+<span class="left">
+  経歴
+  </span>
+</h3>
+</div>
+<div style="display:block;" id="item_gkgai_rykrk_div_minus">
+<h3 id="item_gkgai_rykrk_2">
+<span class="left">
+  経歴
+  </span>
+</h3>
+<div class="cv_item_frame ml-lg-4" id="gkgai_rykrk">
+<ul>
+<li>
+<p class="titleNonBold">九州大学&nbsp;工学研究院 応用化学部門&nbsp;助教&nbsp;</p>
+<p class="titleNonBold">
+</p><p class="contents">
+<span class="span_ym">2023年10月</span>
+<span class="span_tilde">-</span>
+<span class="span_ym">現在</span>
+</p>
+<p class="contents">
+</p><div class="accordion-menu">
+<p class="accordion-menu-bar" onclick="toggleAccordion(&#39;11753475_gaiyo1&#39;, &#39;11753475_icon1&#39;)">
+<span class="fa fa-caret-right gaiyo-label" id="11753475_icon1">　</span>
+          詳細を見る
+        </p>
+</div>
+<div class="is-none-disp-gaiyo gaiyo-detail" id="11753475_gaiyo1">
+<p class="contents">
+<a target="_blank" href="https://researchmap.jp/IWLeong/research_experience/43644248?lang=ja">
+<span class="fa fa-external-link-alt">
+<span>researchmap</span>
+</span></a>
+</p>
+</div>
+<p></p>
+</li>
+<li>
+<p class="titleNonBold">大阪大学&nbsp;&nbsp;学術研究員&nbsp;</p>
+<p class="titleNonBold">
+</p><p class="contents">
+<span class="span_ym">2023年4月</span>
+<span class="span_tilde">-</span>
+<span class="span_ym">2023年9月</span>
+</p>
+<p class="contents">
+</p></li>
+<li>
+<p class="titleNonBold">大阪大学&nbsp;産業科学研究所&nbsp;特任研究員(常勤)&nbsp;</p>
+<p class="titleNonBold">
+</p><p class="contents">
+<span class="span_ym">2023年4月</span>
+<span class="span_tilde">-</span>
+<span class="span_ym">2023年9月</span>
+</p>
+<p class="contents">
+</p><div class="accordion-menu">
+<p class="accordion-menu-bar" onclick="toggleAccordion(&#39;11753480_gaiyo1&#39;, &#39;11753480_icon1&#39;)">
+<span class="fa fa-caret-right gaiyo-label" id="11753480_icon1">　</span>
+          詳細を見る
+        </p>
+</div>
+<div class="is-none-disp-gaiyo gaiyo-detail" id="11753480_gaiyo1">
+<p class="contents">
+<a target="_blank" href="https://researchmap.jp/IWLeong/research_experience/42366212?lang=ja">
+<span class="fa fa-external-link-alt">
+<span>researchmap</span>
+</span></a>
+</p>
+</div>
+<p></p>
+</li>
+<li>
+<p class="titleNonBold">独立行政法人日本学術振興会&nbsp;&nbsp;特別研究員 (DC1)&nbsp;</p>
+<p class="titleNonBold">
+</p><p class="contents">
+<span class="span_ym">2020年4月</span>
+<span class="span_tilde">-</span>
+<span class="span_ym">2023年3月</span>
+</p>
+<p class="contents">
+</p><div class="accordion-menu">
+<p class="accordion-menu-bar" onclick="toggleAccordion(&#39;11753483_gaiyo1&#39;, &#39;11753483_icon1&#39;)">
+<span class="fa fa-caret-right gaiyo-label" id="11753483_icon1">　</span>
+          詳細を見る
+        </p>
+</div>
+<div class="is-none-disp-gaiyo gaiyo-detail" id="11753483_gaiyo1">
+<p class="contents">
+<span class="text-secondary">国名：</span>日本国</p>
+<p class="contents">
+<a target="_blank" href="https://researchmap.jp/IWLeong/research_experience/39748392?lang=ja">
+<span class="fa fa-external-link-alt">
+<span>researchmap</span>
+</span></a>
+</p>
+</div>
+<p></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="text">
+<div style="display:none;" id="item_univ_div_plus">
+<input value="1" name="item_univ_hid" type="hidden">
+<h3 id="item_univ_1">
+<span class="left">
+  学歴
+  </span>
+</h3>
+</div>
+<div style="display:block;" id="item_univ_div_minus">
+<h3 id="item_univ_2">
+<span class="left">
+  学歴
+  </span>
+</h3>
+<div class="cv_item_frame ml-lg-4" id="univ">
+<ul>
+<li>
+<p class="titleNonBold">大阪大学
+        &nbsp;
+        大学院理学研究科
+        &nbsp;
+        化学専攻</p>
+<p class="contents">
+<span class="span_ym">2020年4月</span>
+<span class="span_tilde">-</span>
+<span class="span_ym">2023年3月</span>
+</p>
+<p class="contents">
+</p><div class="accordion-menu">
+<p class="accordion-menu-bar" onclick="toggleAccordion(&#39;11753479_gaiyo1&#39;, &#39;11753479_icon1&#39;)">
+<span class="fa fa-caret-right gaiyo-label" id="11753479_icon1">　</span>
+          詳細を見る
+        </p>
+</div>
+<div class="is-none-disp-gaiyo gaiyo-detail" id="11753479_gaiyo1">
+<p class="contents">
+<span class="text-secondary">国名：</span>日本国</p>
+<p class="contents">
+<a target="_blank" href="https://researchmap.jp/IWLeong/education/39748470?lang=ja">
+<span class="fa fa-external-link-alt">
+<span>researchmap</span>
+</span></a>
+</p>
+</div>
+<p></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div style="display:block;" id="inf_research_div_minus">
+<div class="text">
+<div style="display:none;" id="item_kenkyu_keyword_div_plus">
+<input value="1" name="item_kenkyu_keyword_hid" type="hidden">
+<h3 id="item_kenkyu_keyword_1">
+<span class="left">
+  研究テーマ・研究キーワード
+  </span>
+</h3>
+</div>
+<div style="display:block;" id="item_kenkyu_keyword_div_minus">
+<h3 id="item_kenkyu_keyword_2">
+<span class="left">
+  研究テーマ・研究キーワード
+  </span>
+</h3>
+<div class="cv_item_frame ml-lg-4" id="kenkyu_keyword">
+<ul>
+<li>
+<p class="contents">
+<span class="text-secondary">研究テーマ：</span>
+<span class="titleNonBold">固体ナノポアを用いた塩分濃度差発電技術の開発</span>
+</p>
+<p class="contents">
+<span class="text-secondary">研究キーワード：</span>
+<span class="titleNonBold">ナノポア</span>
+</p>
+<p class="contents">
+<span class="text-secondary">研究期間：</span>
+<span class="span_ym">2024年5月</span>
+<span class="span_tilde">-</span>
+<span class="span_ym">2025年3月</span>
+</p>
+</li>
+<li>
+<p class="contents">
+<span class="text-secondary">研究テーマ：</span>
+<span class="titleNonBold">マイクロ・ナノデバイス</span>
+</p>
+<p class="contents">
+<span class="text-secondary">研究キーワード：</span>
+<span class="titleNonBold">マイクロ・ナノデバイス</span>
+</p>
+<p class="contents">
+<span class="text-secondary">研究期間：</span>
+<span class="span_ym">2024年</span>
+</p>
+</li>
+<li>
+<p class="contents">
+<span class="text-secondary">研究テーマ：</span>
+<span class="titleNonBold">ナノ計測</span>
+</p>
+<p class="contents">
+<span class="text-secondary">研究キーワード：</span>
+<span class="titleNonBold">ナノ計測</span>
+</p>
+<p class="contents">
+<span class="text-secondary">研究期間：</span>
+<span class="span_ym">2024年</span>
+</p>
+</li>
+<li>
+<p class="contents">
+<span class="text-secondary">研究テーマ：</span>
+<span class="titleNonBold">ナノ流体</span>
+</p>
+<p class="contents">
+<span class="text-secondary">研究キーワード：</span>
+<span class="titleNonBold">ナノ流体</span>
+</p>
+<p class="contents">
+<span class="text-secondary">研究期間：</span>
+<span class="span_ym">2024年</span>
+</p>
+</li>
+<li>
+<p class="contents">
+<span class="text-secondary">研究テーマ：</span>
+<span class="titleNonBold">ナノポア</span>
+</p>
+<p class="contents">
+<span class="text-secondary">研究キーワード：</span>
+<span class="titleNonBold">ナノポア</span>
+</p>
+<p class="contents">
+<span class="text-secondary">研究期間：</span>
+<span class="span_ym">2024年</span>
+</p>
+</li>
+<li>
+<p class="contents">
+<span class="text-secondary">研究テーマ：</span>
+<span class="titleNonBold">MEMS</span>
+</p>
+<p class="contents">
+<span class="text-secondary">研究キーワード：</span>
+<span class="titleNonBold">MEMS</span>
+</p>
+<p class="contents">
+<span class="text-secondary">研究期間：</span>
+<span class="span_ym">2024年</span>
+</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="text">
+<div style="display:none;" id="item_jusho_div_plus">
+<input value="1" name="item_jusho_hid" type="hidden">
+<h3 id="item_jusho_1">
+<span class="left">
+  受賞
+  </span>
+</h3>
+</div>
+<div style="display:block;" id="item_jusho_div_minus">
+<h3 id="item_jusho_2">
+<span class="left">
+  受賞
+  </span>
+</h3>
+<div class="cv_item_frame ml-lg-4" id="jusho">
+<ul>
+<li>
+<p class="title">第 101 春季年会（2021）学生講演賞</p>
+<p class="contents">2021年6月
+        &nbsp;
+      日本化学会
+        &nbsp;
+      The Chemical Society of Japan (CSJ) Student Presentation Award 2021</p>
+<p class="contents gray">
+</p><p class="contents">
+</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="text">
+<div style="display:none;" id="item_ronbn_div_plus">
+<input value="1" name="item_ronbn_hid" type="hidden">
+<h3 id="item_ronbn_1">
+<span class="left">
+  論文
+  </span>
+</h3>
+</div>
+<div style="display:block;" id="item_ronbn_div_minus">
+<h3 id="item_ronbn_2">
+<span class="left">
+  論文
+  </span>
+</h3>
+<div class="cv_item_frame ml-lg-4" id="ronbn">
+<ul>
+<li>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="title">
+<a href="https://www.nature.com/articles/s41598-024-67112-8.pdf" target="_blank">Immunological assay using a solid-state pore with a low limit of detection</a>
+<span class="default-badge badge-color-sadok">査読</span>
+</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents gray">Hiroyasu Takei, Tomoko Nakada, lat Wai Leong, Atsuki Ito, Kakeru Hanada, Hinako Maeda, Muhammad Shan Sohail, Kazuhiko Tomiyasu, Osamu Sakamoto, Norihiko Naono, Masateru Taniguchi</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">Scientific Reports
+        &nbsp;
+      14
+        (
+        1
+        )
+      
+        &nbsp;
+      2024年7月
+        &nbsp;
+        <span class="text-secondary">（</span>
+<span class="text-secondary"> eISSN:</span>2045-2322
+<span class="text-secondary">）</span>
+</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">
+</p><div class="accordion-menu">
+<p class="accordion-menu-bar" onclick="toggleAccordion(&#39;11753463_gaiyo1&#39;, &#39;11753463_icon1&#39;)">
+<span class="fa fa-caret-right gaiyo-label" id="11753463_icon1">　</span>詳細を見る</p>
+<div class="is-none-disp-gaiyo gaiyo-detail" id="11753463_gaiyo1">
+<p class="contents">
+<span class="text-secondary">掲載種別：</span>研究論文（学術雑誌）
+                   &nbsp;
+                 <span class="text-secondary">出版者・発行元：</span>Springer Science and Business Media LLC
+                   &nbsp;
+                 </p>
+<p class="contents">Abstract<br><br>Emerging infectious diseases, cancer, and other diseases are quickly tested mainly via immune reactions based on specific molecular recognition between antigens and antibodies. By changing the diameter of solid-state pores, biomolecules of various sizes can be rapidly detected at the single-molecule level. The combination of immunoreactions and solid-state pores paves the way for an efficient testing method with high specificity and sensitivity. The challenge in developing this method is achieving quantitative analysis using solid-state pores. Here, we demonstrate a method with a low limit of detection for testing tumor markers using a combination of immunoreactions and solid-state pore technology. Quantitative analysis of the mixing ratio of two and three beads with different diameters was achieved with an error rate of up to 4.7%. The hybrid solid-state pore and immunoreaction methods with prostate-specific antigen (PSA) and anti-PSA antibody-modified beads achieved a detection limit of 24.9&nbsp;fM PSA in 30&nbsp;min. The hybrid solid-state pore and immunoreaction enabled the rapid development of easy-to-use tests with lower limit of detection and greater throughput than commercially available immunoassay for point-of-care testing.</p>
+<p class="contents">
+<span class="text-secondary">DOI：</span>
+<a target="_blank" href="https://dx.doi.org/10.1038/s41598-024-67112-8">
+<span>10.1038/s41598-024-67112-8</span>
+</a>
+</p>
+<p class="contents">
+<a target="_blank" href="https://researchmap.jp/IWLeong/published_papers/48063325?lang=ja">
+<span class="fa fa-external-link-alt">
+<span>researchmap</span>
+</span></a>
+</p>
+<p class="contents">
+<span class="text-secondary">その他リンク：</span>
+<a target="_blank" href="https://www.nature.com/articles/s41598-024-67112-8">
+<span>https://www.nature.com/articles/s41598-024-67112-8</span>
+</a>
+</p>
+</div>
+</div>
+<p></p>
+</li>
+<li>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="title">
+<a href="https://pubs.acs.org/doi/pdf/10.1021/acsnano.4c01989" target="_blank">Gate-All-Around Nanopore Osmotic Power Generators</a>
+<span class="default-badge badge-color-sadok">査読</span>
+</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents gray">Makusu Tsutsui, Wei-Lun Hsu, Denis Garoli, Iat Wai Leong, Kazumichi Yokota, Hirofumi Daiguji, Tomoji Kawai</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">ACS Nano
+        &nbsp;
+      18
+        (
+        23
+        )
+      
+        &nbsp;
+      15046
+        -
+        15054
+        &nbsp;
+      2024年5月
+        &nbsp;
+        <span class="text-secondary">（</span>
+<span class="text-secondary"> ISSN:</span>1936-0851
+<span class="text-secondary"> eISSN:</span>1936-086X
+<span class="text-secondary">）</span>
+</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">
+</p><div class="accordion-menu">
+<p class="accordion-menu-bar" onclick="toggleAccordion(&#39;11753461_gaiyo1&#39;, &#39;11753461_icon1&#39;)">
+<span class="fa fa-caret-right gaiyo-label" id="11753461_icon1">　</span>詳細を見る</p>
+<div class="is-none-disp-gaiyo gaiyo-detail" id="11753461_gaiyo1">
+<p class="contents">
+<span class="text-secondary">掲載種別：</span>研究論文（学術雑誌）
+                   &nbsp;
+                 <span class="text-secondary">出版者・発行元：</span>American Chemical Society (ACS)
+                   &nbsp;
+                 </p>
+<p class="contents">
+</p><p class="contents">
+<span class="text-secondary">DOI：</span>
+<a target="_blank" href="https://dx.doi.org/10.1021/acsnano.4c01989">
+<span>10.1021/acsnano.4c01989</span>
+</a>
+</p>
+<p class="contents">
+<a target="_blank" href="https://researchmap.jp/IWLeong/published_papers/46810861?lang=ja">
+<span class="fa fa-external-link-alt">
+<span>researchmap</span>
+</span></a>
+</p>
+</div>
+</div>
+<p></p>
+</li>
+<li>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="title">
+<a href="https://onlinelibrary.wiley.com/doi/pdf/10.1002/smtd.202301523" target="_blank">Enhanced Nanoparticle Sensing in a Highly Viscous Nanopore</a>
+<span class="default-badge badge-color-sadok">査読</span>
+</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents gray">Taiga Kawaguchi, Makusu Tsutsui, Sanae Murayama, Iat Wai Leong, Kazumichi Yokota, Yuki Komoto, Masateru Taniguchi</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">Small Methods
+        &nbsp;
+      2024年5月
+        &nbsp;
+        <span class="text-secondary">（</span>
+<span class="text-secondary"> ISSN:</span>2366-9608
+<span class="text-secondary"> eISSN:</span>2366-9608
+<span class="text-secondary">）</span>
+</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">
+</p><div class="accordion-menu">
+<p class="accordion-menu-bar" onclick="toggleAccordion(&#39;11753460_gaiyo1&#39;, &#39;11753460_icon1&#39;)">
+<span class="fa fa-caret-right gaiyo-label" id="11753460_icon1">　</span>詳細を見る</p>
+<div class="is-none-disp-gaiyo gaiyo-detail" id="11753460_gaiyo1">
+<p class="contents">
+<span class="text-secondary">掲載種別：</span>研究論文（学術雑誌）
+                   &nbsp;
+                 <span class="text-secondary">出版者・発行元：</span>Wiley
+                   &nbsp;
+                 </p>
+<p class="contents">Abstract<br><br>Slowing down translocation dynamics is a crucial challenge in nanopore sensing of small molecules and particles. Here, it is reported on nanoparticle motion‐mediated local viscosity enhancement of water‐organic mixtures in a nanofluidic channel that enables slow translocation speed, enhanced capture efficiency, and improved signal‐to‐noise ratio by transmembrane voltage control. It is found that higher detection rates of nanoparticles under larger electrophoretic voltage in the highly viscous solvents. Meanwhile, the strongly pulled particles distort the liquid in the pore at high shear rates over 10&lt;sup&gt;3&lt;/sup&gt; s&lt;sup&gt;−1&lt;/sup&gt; which leads to a counterintuitive phenomenon of slower translocation speed under higher voltage via the induced dilatant viscosity behavior. This mechanism is demonstrated as feasible with a variety of organic molecules, including glycerol, xanthan gum, and polyethylene glycol. The present findings can be useful in resistive pulse analyses of nanoscale objects such as viruses and proteins by allowing a simple and effective way for translocation slowdown, improved detection throughput, and enhanced signal‐to‐noise ratio.</p>
+<p class="contents">
+<span class="text-secondary">DOI：</span>
+<a target="_blank" href="https://dx.doi.org/10.1002/smtd.202301523">
+<span>10.1002/smtd.202301523</span>
+</a>
+</p>
+<p class="contents">
+<a target="_blank" href="https://researchmap.jp/IWLeong/published_papers/46473225?lang=ja">
+<span class="fa fa-external-link-alt">
+<span>researchmap</span>
+</span></a>
+</p>
+</div>
+</div>
+<p></p>
+</li>
+<li>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="title">
+<a href="https://onlinelibrary.wiley.com/doi/pdf/10.1002/EXP.20220110" target="_blank">Scalability of nanopore osmotic energy conversion</a>
+<span class="default-badge badge-color-sadok">査読</span>
+</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents gray">Makusu Tsutsui, Wei‐Lun Hsu, Kazumichi Yokota, Iat Wai Leong, Hirofumi Daiguji, Tomoji Kawai</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">Exploration
+        &nbsp;
+      2024年1月
+        &nbsp;
+        <span class="text-secondary">（</span>
+<span class="text-secondary"> ISSN:</span>2766-8509
+<span class="text-secondary"> eISSN:</span>2766-2098
+<span class="text-secondary">）</span>
+</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">
+</p><div class="accordion-menu">
+<p class="accordion-menu-bar" onclick="toggleAccordion(&#39;10378465_gaiyo1&#39;, &#39;10378465_icon1&#39;)">
+<span class="fa fa-caret-right gaiyo-label" id="10378465_icon1">　</span>詳細を見る</p>
+<div class="is-none-disp-gaiyo gaiyo-detail" id="10378465_gaiyo1">
+<p class="contents">
+<span class="text-secondary">記述言語：</span>その他
+                   &nbsp;
+                 <span class="text-secondary">掲載種別：</span>研究論文（学術雑誌）
+                   &nbsp;
+                 <span class="text-secondary">出版者・発行元：</span>Wiley
+                   &nbsp;
+                 </p>
+<p class="contents">Abstract<br><br>Artificial nanofluidic networks are emerging systems for blue energy conversion that leverages surface charge‐derived permselectivity to induce voltage from diffusive ion transport under salinity difference. Here the pivotal significance of electrostatic inter‐channel couplings in multi‐nanopore membranes, which impose constraints on porosity and subsequently influence the generation of large osmotic power outputs, is illustrated. Constructive interference is observed between two 20&nbsp;nm nanopores of 30&nbsp;nm spacing that renders enhanced permselectivity to osmotic power output via the recovered electroneutrality. On contrary, the interference is revealed as destructive in two‐dimensional arrays causing significant deteriorations of the ion selectivity even for the nanopores sparsely distributed at an order of magnitude larger spacing than the Dukhin length. Most importantly, a scaling law is provided for deducing the maximal membrane area and porosity to avoid the selectivity loss via the inter‐pore electrostatic coupling. As the electric crosstalk is inevitable in any fluidic network, the present findings can be a useful guide to design nanoporous membranes for scalable osmotic power generations.</p>
+<p class="contents">
+<span class="text-secondary">DOI：</span>
+<a target="_blank" href="https://dx.doi.org/10.1002/exp.20220110">
+<span>10.1002/exp.20220110</span>
+</a>
+</p>
+<p class="contents">
+<a target="_blank" href="https://researchmap.jp/IWLeong/published_papers/44417038?lang=ja">
+<span class="fa fa-external-link-alt">
+<span>researchmap</span>
+</span></a>
+</p>
+</div>
+</div>
+<p></p>
+</li>
+<li>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="title">Protocol for preparation of solid-state multipore osmotic power generators
+<span class="default-badge badge-color-sadok">査読</span>
+</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents gray">Makusu Tsutsui, Kazumichi Yokota, Iat Wai Leong, Yuhui He, Tomoji Kawai</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">STAR PROTOCOLS
+        &nbsp;
+      4
+        (
+        2
+        )
+      
+        &nbsp;
+      2023年6月
+        &nbsp;
+        <span class="text-secondary">（</span>
+<span class="text-secondary"> ISSN:</span>2666-1667
+<span class="text-secondary">）</span>
+</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">
+</p><div class="accordion-menu">
+<p class="accordion-menu-bar" onclick="toggleAccordion(&#39;10378475_gaiyo1&#39;, &#39;10378475_icon1&#39;)">
+<span class="fa fa-caret-right gaiyo-label" id="10378475_icon1">　</span>詳細を見る</p>
+<div class="is-none-disp-gaiyo gaiyo-detail" id="10378475_gaiyo1">
+<p class="contents">
+<span class="text-secondary">記述言語：</span>英語
+                   &nbsp;
+                 <span class="text-secondary">掲載種別：</span>研究論文（学術雑誌）
+                   &nbsp;
+                 <span class="text-secondary">出版者・発行元：</span>ELSEVIER
+                   &nbsp;
+                 </p>
+<p class="contents">Nanopore is an emerging energy-harvesting device that can create electricity directly from salt solutions. Here, we present a protocol for the preparation and structure optimization of solid-state multipore osmotic power generators. We describe steps for sculpting multiple pores at well-defined positions in a thin SiNx membrane using electron-beam lithography. We also detail an imprinting technique to form polydimethylsiloxane blocks with fluidic channels bonded to the multipore membrane. This approach facilitates repeated liquid exchange processes involved in ionic current measurements.For complete details on the use and execution of this protocol, please refer to Tsutsui et al.1</p>
+<p class="contents">
+<span class="text-secondary">DOI：</span>
+<a target="_blank" href="https://dx.doi.org/10.1016/j.xpro.2023.102227">
+<span>10.1016/j.xpro.2023.102227</span>
+</a>
+</p>
+<p class="contents">
+<a target="_blank" href="https://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&amp;SrcAuth=Alerting&amp;SrcApp=Alerting&amp;DestApp=WOS&amp;DestLinkType=FullRecord&amp;KeyUT=001053327800001">
+<span class="fa fa-external-link-alt">
+<span>Web of Science</span>
+</span></a>
+</p>
+<p class="contents">
+<a target="_blank" href="https://researchmap.jp/IWLeong/published_papers/43644273?lang=ja">
+<span class="fa fa-external-link-alt">
+<span>researchmap</span>
+</span></a>
+</p>
+</div>
+</div>
+<p></p>
+</li>
+<li class="hidden_detail" style="display: none;">
+<p xmlns:xalan="http://xml.apache.org/xalan" class="title">
+<a href="https://pubs.acs.org/doi/pdf/10.1021/acsami.2c19485" target="_blank">Regulating Nonlinear Ion Transport through a Solid-State Pore by Partial Surface Coatings</a>
+<span class="default-badge badge-color-sadok">査読</span>
+</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents gray">Iat Wai Leong, Makusu Tsutsui, Kazumichi Yokota, Sanae Murayama, Masateru Taniguchi</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">ACS Applied Materials &amp;amp; Interfaces
+        &nbsp;
+      15
+        (
+        4
+        )
+      
+        &nbsp;
+      6123
+        -
+        6132
+        &nbsp;
+      2023年1月
+        &nbsp;
+        <span class="text-secondary">（</span>
+<span class="text-secondary"> ISSN:</span>1944-8244
+<span class="text-secondary"> eISSN:</span>1944-8252
+<span class="text-secondary">）</span>
+</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">
+</p><div class="accordion-menu">
+<p class="accordion-menu-bar" onclick="toggleAccordion(&#39;10378474_gaiyo1&#39;, &#39;10378474_icon1&#39;)">
+<span class="fa fa-caret-right gaiyo-label" id="10378474_icon1">　</span>詳細を見る</p>
+<div class="is-none-disp-gaiyo gaiyo-detail" id="10378474_gaiyo1">
+<p class="contents">
+<span class="text-secondary">記述言語：</span>その他
+                   &nbsp;
+                 <span class="text-secondary">掲載種別：</span>研究論文（学術雑誌）
+                   &nbsp;
+                 <span class="text-secondary">出版者・発行元：</span>American Chemical Society (ACS)
+                   &nbsp;
+                 </p>
+<p class="contents">
+</p><p class="contents">
+<span class="text-secondary">DOI：</span>
+<a target="_blank" href="https://dx.doi.org/10.1021/acsami.2c19485">
+<span>10.1021/acsami.2c19485</span>
+</a>
+</p>
+<p class="contents">
+<a target="_blank" href="https://researchmap.jp/IWLeong/published_papers/41622608?lang=ja">
+<span class="fa fa-external-link-alt">
+<span>researchmap</span>
+</span></a>
+</p>
+</div>
+</div>
+<p></p>
+</li>
+<li class="hidden_detail" style="display: none;">
+<p xmlns:xalan="http://xml.apache.org/xalan" class="title">Synthesis of 3,3′-dihydroxy-2,2′-diindan-1,1′-dione derivatives for tautomeric organic semiconductors exhibiting intramolecular double proton transfer
+<span class="default-badge badge-color-sadok">査読</span>
+</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents gray">Kyohei Nakano, Iat Wai Leong, Daisuke Hashizume, Kirill Bulgarevich, Kazuo Takimiya, Yusuke Nishiyama, Toshio Yamazaki, Keisuke Tajima</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">Chemical Science
+        &nbsp;
+      2023年</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">
+</p><div class="accordion-menu">
+<p class="accordion-menu-bar" onclick="toggleAccordion(&#39;11753466_gaiyo1&#39;, &#39;11753466_icon1&#39;)">
+<span class="fa fa-caret-right gaiyo-label" id="11753466_icon1">　</span>詳細を見る</p>
+<div class="is-none-disp-gaiyo gaiyo-detail" id="11753466_gaiyo1">
+<p class="contents">
+<span class="text-secondary">掲載種別：</span>研究論文（学術雑誌）
+                   &nbsp;
+                 </p>
+<p class="contents">
+</p><p class="contents">
+<span class="text-secondary">DOI：</span>
+<a target="_blank" href="https://dx.doi.org/10.1039/D3SC04125E">
+<span>10.1039/D3SC04125E</span>
+</a>
+</p>
+<p class="contents">
+<a target="_blank" href="https://researchmap.jp/IWLeong/published_papers/45965097?lang=ja">
+<span class="fa fa-external-link-alt">
+<span>researchmap</span>
+</span></a>
+</p>
+</div>
+</div>
+<p></p>
+</li>
+<li class="hidden_detail" style="display: none;">
+<p xmlns:xalan="http://xml.apache.org/xalan" class="title">Interference of electrochemical ion diffusion in nanopore sensing
+<span class="default-badge badge-color-sadok">査読</span>
+</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents gray">Iat Wai Leong, Shohei Kishimoto, Makusu Tsutsui, Masateru Taniguchi</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">iScience
+        &nbsp;
+      25
+        (
+        10
+        )
+      
+        &nbsp;
+      105073
+        -
+        105073
+        &nbsp;
+      2022年10月
+        &nbsp;
+        <span class="text-secondary">（</span>
+<span class="text-secondary"> ISSN:</span>2589-0042
+<span class="text-secondary">）</span>
+</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">
+</p><div class="accordion-menu">
+<p class="accordion-menu-bar" onclick="toggleAccordion(&#39;10378472_gaiyo1&#39;, &#39;10378472_icon1&#39;)">
+<span class="fa fa-caret-right gaiyo-label" id="10378472_icon1">　</span>詳細を見る</p>
+<div class="is-none-disp-gaiyo gaiyo-detail" id="10378472_gaiyo1">
+<p class="contents">
+<span class="text-secondary">記述言語：</span>その他
+                   &nbsp;
+                 <span class="text-secondary">掲載種別：</span>研究論文（学術雑誌）
+                   &nbsp;
+                 <span class="text-secondary">出版者・発行元：</span>Elsevier {BV}
+                   &nbsp;
+                 </p>
+<p class="contents">Interference of electrochemical ion diffusion in nanopore sensing</p>
+<p class="contents">
+<span class="text-secondary">DOI：</span>
+<a target="_blank" href="https://dx.doi.org/10.1016/j.isci.2022.105073">
+<span>10.1016/j.isci.2022.105073</span>
+</a>
+</p>
+<p class="contents">
+<a target="_blank" href="https://researchmap.jp/IWLeong/published_papers/40036899?lang=ja">
+<span class="fa fa-external-link-alt">
+<span>researchmap</span>
+</span></a>
+</p>
+</div>
+</div>
+<p></p>
+</li>
+<li class="hidden_detail" style="display: none;">
+<p xmlns:xalan="http://xml.apache.org/xalan" class="title">Sparse multi-nanopore osmotic power generators
+<span class="default-badge badge-color-sadok">査読</span>
+</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents gray">Makusu Tsutsui, Kazumichi Yokota, Iat Wai Leong, Yuhui He, Tomoji Kawai</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">Cell Reports Physical Science
+        &nbsp;
+      101065
+        -
+        101065
+        &nbsp;
+      2022年10月
+        &nbsp;
+        <span class="text-secondary">（</span>
+<span class="text-secondary"> ISSN:</span>2666-3864
+<span class="text-secondary">）</span>
+</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">
+</p><div class="accordion-menu">
+<p class="accordion-menu-bar" onclick="toggleAccordion(&#39;10378471_gaiyo1&#39;, &#39;10378471_icon1&#39;)">
+<span class="fa fa-caret-right gaiyo-label" id="10378471_icon1">　</span>詳細を見る</p>
+<div class="is-none-disp-gaiyo gaiyo-detail" id="10378471_gaiyo1">
+<p class="contents">
+<span class="text-secondary">記述言語：</span>その他
+                   &nbsp;
+                 <span class="text-secondary">掲載種別：</span>研究論文（学術雑誌）
+                   &nbsp;
+                 <span class="text-secondary">出版者・発行元：</span>Elsevier BV
+                   &nbsp;
+                 </p>
+<p class="contents">
+</p><p class="contents">
+<span class="text-secondary">DOI：</span>
+<a target="_blank" href="https://dx.doi.org/10.1016/j.xcrp.2022.101065">
+<span>10.1016/j.xcrp.2022.101065</span>
+</a>
+</p>
+<p class="contents">
+<a target="_blank" href="https://researchmap.jp/IWLeong/published_papers/40713609?lang=ja">
+<span class="fa fa-external-link-alt">
+<span>researchmap</span>
+</span></a>
+</p>
+</div>
+</div>
+<p></p>
+</li>
+<li class="hidden_detail" style="display: none;">
+<p xmlns:xalan="http://xml.apache.org/xalan" class="title">3D designing of resist membrane pores via direct electron beam lithography
+<span class="default-badge badge-color-sadok">査読</span>
+</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents gray">Shohei Kishimoto, Iat Wai Leong, Sanae Murayama, Tomoko Nakada, Yuki Komoto, Makusu Tsutsui, Masateru Taniguchi</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">Sensors and Actuators B: Chemical
+        &nbsp;
+      357
+        &nbsp;
+      131380
+        -
+        131380
+        &nbsp;
+      2022年4月
+        &nbsp;
+        <span class="text-secondary">（</span>
+<span class="text-secondary"> ISSN:</span>0925-4005
+<span class="text-secondary">）</span>
+</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">
+</p><div class="accordion-menu">
+<p class="accordion-menu-bar" onclick="toggleAccordion(&#39;10378473_gaiyo1&#39;, &#39;10378473_icon1&#39;)">
+<span class="fa fa-caret-right gaiyo-label" id="10378473_icon1">　</span>詳細を見る</p>
+<div class="is-none-disp-gaiyo gaiyo-detail" id="10378473_gaiyo1">
+<p class="contents">
+<span class="text-secondary">記述言語：</span>英語
+                   &nbsp;
+                 <span class="text-secondary">掲載種別：</span>研究論文（学術雑誌）
+                   &nbsp;
+                 <span class="text-secondary">出版者・発行元：</span>Elsevier BV
+                   &nbsp;
+                 </p>
+<p class="contents">
+</p><p class="contents">
+<span class="text-secondary">DOI：</span>
+<a target="_blank" href="https://dx.doi.org/10.1016/j.snb.2022.131380">
+<span>10.1016/j.snb.2022.131380</span>
+</a>
+</p>
+<p class="contents">
+<a target="_blank" href="https://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&amp;SrcAuth=Alerting&amp;SrcApp=Alerting&amp;DestApp=WOS&amp;DestLinkType=FullRecord&amp;KeyUT=000745113900004">
+<span class="fa fa-external-link-alt">
+<span>Web of Science</span>
+</span></a>
+</p>
+<p class="contents">
+<a target="_blank" href="https://researchmap.jp/IWLeong/published_papers/39748316?lang=ja">
+<span class="fa fa-external-link-alt">
+<span>researchmap</span>
+</span></a>
+</p>
+</div>
+</div>
+<p></p>
+</li>
+<li class="hidden_detail" style="display: none;">
+<p xmlns:xalan="http://xml.apache.org/xalan" class="title">Salt Gradient Control of Translocation Dynamics in a Solid-State Nanopore
+<span class="default-badge badge-color-sadok">査読</span>
+</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents gray">Iat Wai Leong, Makusu Tsutsui, Kazumichi Yokota, Masateru Taniguchi</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">Analytical Chemistry
+        &nbsp;
+      93
+        (
+        49
+        )
+      
+        &nbsp;
+      16700
+        -
+        16708
+        &nbsp;
+      2021年12月</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">
+</p><div class="accordion-menu">
+<p class="accordion-menu-bar" onclick="toggleAccordion(&#39;10378470_gaiyo1&#39;, &#39;10378470_icon1&#39;)">
+<span class="fa fa-caret-right gaiyo-label" id="10378470_icon1">　</span>詳細を見る</p>
+<div class="is-none-disp-gaiyo gaiyo-detail" id="10378470_gaiyo1">
+<p class="contents">
+<span class="text-secondary">記述言語：</span>その他
+                   &nbsp;
+                 <span class="text-secondary">掲載種別：</span>研究論文（学術雑誌）
+                   &nbsp;
+                 </p>
+<p class="contents">
+</p><p class="contents">
+<span class="text-secondary">DOI：</span>
+<a target="_blank" href="https://dx.doi.org/10.1021/acs.analchem.1c04342">
+<span>10.1021/acs.analchem.1c04342</span>
+</a>
+</p>
+</div>
+</div>
+<p></p>
+</li>
+<li class="hidden_detail" style="display: none;">
+<p xmlns:xalan="http://xml.apache.org/xalan" class="title">Machine learning-driven electronic identifications of single pathogenic bacteria
+<span class="default-badge badge-color-sadok">査読</span>
+</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents gray">Shota Hattori, Rintaro Sekido, Iat Wai Leong, Makusu Tsutsui, Akihide Arima, Masayoshi Tanaka, Kazumichi Yokota, Takashi Washio, Tomoji Kawai, Mina Okochi</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">Scientific Reports
+        &nbsp;
+      10
+        (
+        1
+        )
+      
+        &nbsp;
+      2020年12月</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">
+</p><div class="accordion-menu">
+<p class="accordion-menu-bar" onclick="toggleAccordion(&#39;10378468_gaiyo1&#39;, &#39;10378468_icon1&#39;)">
+<span class="fa fa-caret-right gaiyo-label" id="10378468_icon1">　</span>詳細を見る</p>
+<div class="is-none-disp-gaiyo gaiyo-detail" id="10378468_gaiyo1">
+<p class="contents">
+<span class="text-secondary">記述言語：</span>英語
+                   &nbsp;
+                 <span class="text-secondary">掲載種別：</span>研究論文（学術雑誌）
+                   &nbsp;
+                 </p>
+<p class="contents">&lt;jats:title&gt;Abstract&lt;/jats:title&gt;<br>&lt;jats:p&gt;A rapid method for screening pathogens can revolutionize health care by enabling infection control through medication before symptom. Here we report on label-free single-cell identifications of clinically-important pathogenic bacteria by using a polymer-integrated low thickness-to-diameter aspect ratio pore and machine learning-driven resistive pulse analyses. A high-spatiotemporal resolution of this electrical sensor enabled to observe galvanotactic response intrinsic to the microbes during their translocation. We demonstrated discrimination of the cellular motility via signal pattern classifications in a high-dimensional feature space. As the detection-to-decision can be completed within milliseconds, the present technique may be used for real-time screening of pathogenic bacteria for environmental and medical applications.&lt;/jats:p&gt;</p>
+<p class="contents">
+<span class="text-secondary">DOI：</span>
+<a target="_blank" href="https://dx.doi.org/10.1038/s41598-020-72508-3">
+<span>10.1038/s41598-020-72508-3</span>
+</a>
+</p>
+</div>
+</div>
+<p></p>
+</li>
+<li class="hidden_detail" style="display: none;">
+<p xmlns:xalan="http://xml.apache.org/xalan" class="title">Quasi-Stable Salt Gradient and Resistive Switching in Solid-State Nanopores
+<span class="default-badge badge-color-sadok">査読</span>
+</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents gray">Iat Wai Leong, Makusu Tsutsui, Sanae Murayama, Tomoki Hayashida, Yuhui He, Masateru Taniguchi</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">ACS Applied Materials &amp; Interfaces
+        &nbsp;
+      12
+        (
+        46
+        )
+      
+        &nbsp;
+      52175
+        -
+        52181
+        &nbsp;
+      2020年11月</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">
+</p><div class="accordion-menu">
+<p class="accordion-menu-bar" onclick="toggleAccordion(&#39;10378467_gaiyo1&#39;, &#39;10378467_icon1&#39;)">
+<span class="fa fa-caret-right gaiyo-label" id="10378467_icon1">　</span>詳細を見る</p>
+<div class="is-none-disp-gaiyo gaiyo-detail" id="10378467_gaiyo1">
+<p class="contents">
+<span class="text-secondary">記述言語：</span>その他
+                   &nbsp;
+                 <span class="text-secondary">掲載種別：</span>研究論文（学術雑誌）
+                   &nbsp;
+                 </p>
+<p class="contents">
+</p><p class="contents">
+<span class="text-secondary">DOI：</span>
+<a target="_blank" href="https://dx.doi.org/10.1021/acsami.0c15538">
+<span>10.1021/acsami.0c15538</span>
+</a>
+</p>
+</div>
+</div>
+<p></p>
+</li>
+<li class="hidden_detail" style="display: none;">
+<p xmlns:xalan="http://xml.apache.org/xalan" class="title">Electroosmosis-Driven Nanofluidic Diodes
+<span class="default-badge badge-color-sadok">査読</span>
+</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents gray">Iat Wai Leong, Makusu Tsutsui, Sanae Murayama, Yuhui He, Masateru Taniguchi</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">The Journal of Physical Chemistry B
+        &nbsp;
+      124
+        (
+        32
+        )
+      
+        &nbsp;
+      7086
+        -
+        7092
+        &nbsp;
+      2020年8月</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">
+</p><div class="accordion-menu">
+<p class="accordion-menu-bar" onclick="toggleAccordion(&#39;10378469_gaiyo1&#39;, &#39;10378469_icon1&#39;)">
+<span class="fa fa-caret-right gaiyo-label" id="10378469_icon1">　</span>詳細を見る</p>
+<div class="is-none-disp-gaiyo gaiyo-detail" id="10378469_gaiyo1">
+<p class="contents">
+<span class="text-secondary">記述言語：</span>その他
+                   &nbsp;
+                 <span class="text-secondary">掲載種別：</span>研究論文（学術雑誌）
+                   &nbsp;
+                 </p>
+<p class="contents">
+</p><p class="contents">
+<span class="text-secondary">DOI：</span>
+<a target="_blank" href="https://dx.doi.org/10.1021/acs.jpcb.0c04677">
+<span>10.1021/acs.jpcb.0c04677</span>
+</a>
+</p>
+</div>
+</div>
+<p></p>
+</li>
+<li class="hidden_detail" style="display: none;">
+<p xmlns:xalan="http://xml.apache.org/xalan" class="title">Back-Side Polymer-Coated Solid-State Nanopore Sensors
+<span class="default-badge badge-color-sadok">査読</span>
+</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents gray">Iat Wai Leong, Makusu Tsutsui, Tomoko Nakada, Masateru Taniguchi, Takashi Washio, Tomoji Kawai</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">ACS OMEGA
+        &nbsp;
+      4
+        (
+        7
+        )
+      
+        &nbsp;
+      12561
+        -
+        12566
+        &nbsp;
+      2019年7月</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">
+</p><div class="accordion-menu">
+<p class="accordion-menu-bar" onclick="toggleAccordion(&#39;10378466_gaiyo1&#39;, &#39;10378466_icon1&#39;)">
+<span class="fa fa-caret-right gaiyo-label" id="10378466_icon1">　</span>詳細を見る</p>
+<div class="is-none-disp-gaiyo gaiyo-detail" id="10378466_gaiyo1">
+<p class="contents">
+<span class="text-secondary">記述言語：</span>英語
+                   &nbsp;
+                 <span class="text-secondary">掲載種別：</span>研究論文（学術雑誌）
+                   &nbsp;
+                 </p>
+<p class="contents">We systematically investigated the influence of polymer coating on temporal resolution of solid-state nanopores. We fabricated a Si3N4 nanopore integrated with a polyimide sheet partially covering the substrate surface. Upon detecting the nanoparticles dispersed in an electrolyte buffer by ionic current measurements, we observed a larger resistive pulse height along with a faster current decay at the tails under larger coverage of the polymeric layer, thereby suggesting a prominent role of the water-touching Si3N4 thin film as a significant capacitor serving to retard the ionic current response to the ion blockade by fast translocation of particles through the nanopores. From this, we came up with back-side polymer-coated chip designs and demonstrated improved pore sensor temporal resolution by developing a nanopore with a thick polymethyl-methacrylate layer laminated on the bottom surface. The present findings may be useful in developing integrated solid-state nanopore sensors with embedded nanochannels and nanoelectrodes.</p>
+<p class="contents">
+<span class="text-secondary">DOI：</span>
+<a target="_blank" href="https://dx.doi.org/10.1021/acsomega.9b00946">
+<span>10.1021/acsomega.9b00946</span>
+</a>
+</p>
+</div>
+</div>
+<p></p>
+</li>
+</ul>
+</div>
+<p>
+<a id="ronbn" class="open_button_ja ml-md-4" href="javascript:void(0);">▼全件表示</a>
+</p>
+</div>
+</div>
+<div class="text">
+<div style="display:none;" id="item_sosetu_div_plus">
+<input value="1" name="item_sosetu_hid" type="hidden">
+<h3 id="item_sosetu_1">
+<span class="left">
+  MISC
+  </span>
+</h3>
+</div>
+<div style="display:block;" id="item_sosetu_div_minus">
+<h3 id="item_sosetu_2">
+<span class="left">
+  MISC
+  </span>
+</h3>
+<div class="cv_item_frame ml-lg-4" id="sosetu">
+<ul>
+<li>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="title">マルチナノポア発電素子</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents gray">筒井真楠, 横田一道, LEONG Iat Wai, HE Yuhui, 川合知二</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">応用物理学会春季学術講演会講演予稿集(CD-ROM)
+        &nbsp;
+      70th
+        &nbsp;
+      2023年
+       &nbsp;
+       <span class="text-secondary">（</span>
+<span class="text-secondary"> ISSN:</span>2436-7613
+<span class="text-secondary">）</span>
+</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">
+</p><div class="accordion-menu">
+<p class="accordion-menu-bar" onclick="toggleAccordion(&#39;11753474_gaiyo1&#39;, &#39;11753474_icon1&#39;)">
+<span class="fa fa-caret-right gaiyo-label" id="11753474_icon1">　</span>詳細を見る</p>
+<div class="is-none-disp-gaiyo gaiyo-detail" id="11753474_gaiyo1">
+<p class="contents">
+</p><p class="contents">
+<a target="_blank" href="https://jglobal.jst.go.jp/detail.php?from=API&amp;JGLOBAL_ID=202302255425980031">
+<span class="fa fa-external-link-alt">
+<span>J-GLOBAL</span>
+</span></a>
+</p>
+<p class="contents">
+<a target="_blank" href="https://researchmap.jp/IWLeong/misc/45965082?lang=ja">
+<span class="fa fa-external-link-alt">
+<span>researchmap</span>
+</span></a>
+</p>
+</div>
+</div>
+<p></p>
+</li>
+<li>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="title">高粘性下におけるナノポア内の1粒子泳動ダイナミクス機構</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents gray">川口大雅, 川口大雅, 筒井真楠, LEONG Iat-Wai, 谷口正輝</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">分子科学討論会講演プログラム&amp;要旨(Web)
+        &nbsp;
+      17th
+        &nbsp;
+      2023年</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">
+</p><div class="accordion-menu">
+<p class="accordion-menu-bar" onclick="toggleAccordion(&#39;11753484_gaiyo1&#39;, &#39;11753484_icon1&#39;)">
+<span class="fa fa-caret-right gaiyo-label" id="11753484_icon1">　</span>詳細を見る</p>
+<div class="is-none-disp-gaiyo gaiyo-detail" id="11753484_gaiyo1">
+<p class="contents">
+</p><p class="contents">
+<a target="_blank" href="https://jglobal.jst.go.jp/detail.php?from=API&amp;JGLOBAL_ID=202302269617131731">
+<span class="fa fa-external-link-alt">
+<span>J-GLOBAL</span>
+</span></a>
+</p>
+<p class="contents">
+<a target="_blank" href="https://researchmap.jp/IWLeong/misc/45965080?lang=ja">
+<span class="fa fa-external-link-alt">
+<span>researchmap</span>
+</span></a>
+</p>
+</div>
+</div>
+<p></p>
+</li>
+<li>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="title">分子内プロトン移動性を有する有機半導体中の電荷輸送</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents gray">中野恭兵, LEONG Iat Wai, 西山裕介, 西山裕介, 魚返祐太朗, 魚返祐太朗, 山崎俊夫, 橋爪大輔, 但馬敬介</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">応用物理学会秋季学術講演会講演予稿集(CD-ROM)
+        &nbsp;
+      83rd
+        &nbsp;
+      2022年
+       &nbsp;
+       <span class="text-secondary">（</span>
+<span class="text-secondary"> ISSN:</span>2436-7613
+<span class="text-secondary">）</span>
+</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">
+</p><div class="accordion-menu">
+<p class="accordion-menu-bar" onclick="toggleAccordion(&#39;11753476_gaiyo1&#39;, &#39;11753476_icon1&#39;)">
+<span class="fa fa-caret-right gaiyo-label" id="11753476_icon1">　</span>詳細を見る</p>
+<div class="is-none-disp-gaiyo gaiyo-detail" id="11753476_gaiyo1">
+<p class="contents">
+</p><p class="contents">
+<a target="_blank" href="https://jglobal.jst.go.jp/detail.php?from=API&amp;JGLOBAL_ID=202302244302476973">
+<span class="fa fa-external-link-alt">
+<span>J-GLOBAL</span>
+</span></a>
+</p>
+<p class="contents">
+<a target="_blank" href="https://researchmap.jp/IWLeong/misc/43644286?lang=ja">
+<span class="fa fa-external-link-alt">
+<span>researchmap</span>
+</span></a>
+</p>
+</div>
+</div>
+<p></p>
+</li>
+<li>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="title">ナノポア計測における電極界面抵抗の影響</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents gray">筒井真楠, LEONG Iat Wai, 岸本匠平, 谷口正輝</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">応用物理学会秋季学術講演会講演予稿集(CD-ROM)
+        &nbsp;
+      83rd
+        &nbsp;
+      2022年
+       &nbsp;
+       <span class="text-secondary">（</span>
+<span class="text-secondary"> ISSN:</span>2436-7613
+<span class="text-secondary">）</span>
+</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">
+</p><div class="accordion-menu">
+<p class="accordion-menu-bar" onclick="toggleAccordion(&#39;11753469_gaiyo1&#39;, &#39;11753469_icon1&#39;)">
+<span class="fa fa-caret-right gaiyo-label" id="11753469_icon1">　</span>詳細を見る</p>
+<div class="is-none-disp-gaiyo gaiyo-detail" id="11753469_gaiyo1">
+<p class="contents">
+</p><p class="contents">
+<a target="_blank" href="https://jglobal.jst.go.jp/detail.php?from=API&amp;JGLOBAL_ID=202302285307948339">
+<span class="fa fa-external-link-alt">
+<span>J-GLOBAL</span>
+</span></a>
+</p>
+<p class="contents">
+<a target="_blank" href="https://researchmap.jp/IWLeong/misc/43644285?lang=ja">
+<span class="fa fa-external-link-alt">
+<span>researchmap</span>
+</span></a>
+</p>
+</div>
+</div>
+<p></p>
+</li>
+<li>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="title">クラウンエーテル錯体における固体ナノポアのイオン輸送特性</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents gray">LEONG Iat Wai, 筒井真楠, 谷口正輝</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">応用物理学会秋季学術講演会講演予稿集(CD-ROM)
+        &nbsp;
+      83rd
+        &nbsp;
+      2022年
+       &nbsp;
+       <span class="text-secondary">（</span>
+<span class="text-secondary"> ISSN:</span>2436-7613
+<span class="text-secondary">）</span>
+</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">
+</p><div class="accordion-menu">
+<p class="accordion-menu-bar" onclick="toggleAccordion(&#39;11753467_gaiyo1&#39;, &#39;11753467_icon1&#39;)">
+<span class="fa fa-caret-right gaiyo-label" id="11753467_icon1">　</span>詳細を見る</p>
+<div class="is-none-disp-gaiyo gaiyo-detail" id="11753467_gaiyo1">
+<p class="contents">
+</p><p class="contents">
+<a target="_blank" href="https://jglobal.jst.go.jp/detail.php?from=API&amp;JGLOBAL_ID=202302251783158088">
+<span class="fa fa-external-link-alt">
+<span>J-GLOBAL</span>
+</span></a>
+</p>
+<p class="contents">
+<a target="_blank" href="https://researchmap.jp/IWLeong/misc/43644355?lang=ja">
+<span class="fa fa-external-link-alt">
+<span>researchmap</span>
+</span></a>
+</p>
+</div>
+</div>
+<p></p>
+</li>
+<li class="hidden_detail" style="display: none;">
+<p xmlns:xalan="http://xml.apache.org/xalan" class="title">Rectification of ionic current in asymmetric dielectric coating solidstate nanopore under salt gradient</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents gray">LEONG Iat Wai, TSUTSI Makusu, TANIGUCHI Masateru</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">日本化学会春季年会講演予稿集(Web)
+        &nbsp;
+      102nd
+        &nbsp;
+      2022年</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">
+</p><div class="accordion-menu">
+<p class="accordion-menu-bar" onclick="toggleAccordion(&#39;11753465_gaiyo1&#39;, &#39;11753465_icon1&#39;)">
+<span class="fa fa-caret-right gaiyo-label" id="11753465_icon1">　</span>詳細を見る</p>
+<div class="is-none-disp-gaiyo gaiyo-detail" id="11753465_gaiyo1">
+<p class="contents">
+</p><p class="contents">
+<a target="_blank" href="https://jglobal.jst.go.jp/detail.php?from=API&amp;JGLOBAL_ID=202202229832421887">
+<span class="fa fa-external-link-alt">
+<span>J-GLOBAL</span>
+</span></a>
+</p>
+<p class="contents">
+<a target="_blank" href="https://researchmap.jp/IWLeong/misc/39748326?lang=ja">
+<span class="fa fa-external-link-alt">
+<span>researchmap</span>
+</span></a>
+</p>
+</div>
+</div>
+<p></p>
+</li>
+</ul>
+</div>
+<p>
+<a id="sosetu" class="open_button_ja ml-md-4" href="javascript:void(0);">▼全件表示</a>
+</p>
+</div>
+</div>
+<div class="text">
+<div style="display:none;" id="item_szk_gkkai_div_plus">
+<input value="1" name="item_szk_gkkai_hid" type="hidden">
+<h3 id="item_szk_gkkai_1">
+<span class="left">
+  所属学協会
+  </span>
+</h3>
+</div>
+<div style="display:block;" id="item_szk_gkkai_div_minus">
+<h3 id="item_szk_gkkai_2">
+<span class="left">
+  所属学協会
+  </span>
+</h3>
+<div class="cv_item_frame ml-lg-4" id="szk_gkkai">
+<ul>
+<li>
+<p class="titleNonBold">分子科学会</p>
+<p class="contents">
+<span class="span_ym">2022年9月</span>
+<span class="span_tilde">-</span>
+<span class="span_ym">2023年8月</span>
+</p>
+<p class="contents">
+</p><div class="accordion-menu">
+<p class="accordion-menu-bar" onclick="toggleAccordion(&#39;11753477_gaiyo1&#39;, &#39;11753477_icon1&#39;)">
+<span class="fa fa-caret-right gaiyo-label" id="11753477_icon1">　</span>
+          詳細を見る
+        </p>
+</div>
+<div class="is-none-disp-gaiyo gaiyo-detail" id="11753477_gaiyo1">
+<p class="contents">
+<a target="_blank" href="https://researchmap.jp/IWLeong/association_memberships/39748590?lang=ja">
+<span class="fa fa-external-link-alt">
+<span>researchmap</span>
+</span></a>
+</p>
+</div>
+<p></p>
+</li>
+<li>
+<p class="titleNonBold">応用物理学会</p>
+<p class="contents">
+<span class="span_ym">2019年3月</span>
+<span class="span_tilde">-</span>
+<span class="span_ym">現在</span>
+</p>
+<p class="contents">
+</p><div class="accordion-menu">
+<p class="accordion-menu-bar" onclick="toggleAccordion(&#39;11753481_gaiyo1&#39;, &#39;11753481_icon1&#39;)">
+<span class="fa fa-caret-right gaiyo-label" id="11753481_icon1">　</span>
+          詳細を見る
+        </p>
+</div>
+<div class="is-none-disp-gaiyo gaiyo-detail" id="11753481_gaiyo1">
+<p class="contents">
+<a target="_blank" href="https://researchmap.jp/IWLeong/association_memberships/39748584?lang=ja">
+<span class="fa fa-external-link-alt">
+<span>researchmap</span>
+</span></a>
+</p>
+</div>
+<p></p>
+</li>
+<li>
+<p class="titleNonBold">日本化学会</p>
+<p class="contents">
+<span class="span_ym">2019年3月</span>
+<span class="span_tilde">-</span>
+<span class="span_ym">2023年3月</span>
+</p>
+<p class="contents">
+</p><div class="accordion-menu">
+<p class="accordion-menu-bar" onclick="toggleAccordion(&#39;11753482_gaiyo1&#39;, &#39;11753482_icon1&#39;)">
+<span class="fa fa-caret-right gaiyo-label" id="11753482_icon1">　</span>
+          詳細を見る
+        </p>
+</div>
+<div class="is-none-disp-gaiyo gaiyo-detail" id="11753482_gaiyo1">
+<p class="contents">
+<a target="_blank" href="https://researchmap.jp/IWLeong/association_memberships/39748587?lang=ja">
+<span class="fa fa-external-link-alt">
+<span>researchmap</span>
+</span></a>
+</p>
+</div>
+<p></p>
+</li>
+<li>
+<p class="titleNonBold">分子科学会</p>
+<p class="contents">
+</p><p class="contents">
+</p></li>
+<li>
+<p class="titleNonBold">応用物理学会</p>
+<p class="contents">
+</p><p class="contents">
+</p></li>
+<li class="hidden_detail" style="display: none;">
+<p class="titleNonBold">日本化学会</p>
+<p class="contents">
+</p><p class="contents">
+</p></li>
+</ul>
+</div>
+<p>
+<a id="szk_gkkai" class="open_button_ja ml-md-4" href="javascript:void(0);">▼全件表示</a>
+</p>
+</div>
+</div>
+<div class="text">
+<div style="display:none;" id="item_kaknh_get_div_plus">
+<input value="1" name="item_kaknh_get_hid" type="hidden">
+<h3 id="item_kaknh_get_1">
+<span class="left">
+  共同研究・競争的資金等の研究課題
+  </span>
+</h3>
+</div>
+<div style="display:block;" id="item_kaknh_get_div_minus">
+<h3 id="item_kaknh_get_2">
+<span class="left">
+  共同研究・競争的資金等の研究課題
+  </span>
+</h3>
+<div class="cv_item_frame ml-lg-4" id="kaknh_get">
+<ul>
+<li>
+<p class="title">固体ナノポアを用いた塩分濃度差発電技術の開拓</p>
+<p class="contents">
+<span class="span_ym">2022年</span>
+<span class="span_tilde">-</span>
+<span class="span_ym">2024年</span>
+</p>
+<p class="contents">戦略的創造研究推進事業 (文部科学省)</p>
+<p class="contents gray">
+</p><div class="accordion-menu">
+<p class="accordion-menu-bar" onclick="toggleAccordion(&#39;11638863_gaiyo1&#39;, &#39;11638863_icon1&#39;)">
+<span class="fa fa-caret-right gaiyo-label" id="11638863_icon1">　</span>
+          詳細を見る
+        </p>
+</div>
+<div class="is-none-disp-gaiyo gaiyo-detail" id="11638863_gaiyo1">
+<p class="contents">
+<span class="text-secondary">担当区分：</span>研究代表者&nbsp;
+                <span class="text-secondary">資金種別：</span>受託研究</p>
+<p class="contents">
+</p></div>
+</li>
+<li>
+<p class="title">液液界面アシストナノポアを用いた１粒子検出法の創成</p>
+<p class="contents">
+<span class="span_ym">2020年</span>
+<span class="span_tilde">-</span>
+<span class="span_ym">2022年</span>
+</p>
+<p class="contents">日本学術振興会&nbsp;
+      特別研究員</p>
+<p class="contents gray">
+</p><div class="accordion-menu">
+<p class="accordion-menu-bar" onclick="toggleAccordion(&#39;11634894_gaiyo1&#39;, &#39;11634894_icon1&#39;)">
+<span class="fa fa-caret-right gaiyo-label" id="11634894_icon1">　</span>
+          詳細を見る
+        </p>
+</div>
+<div class="is-none-disp-gaiyo gaiyo-detail" id="11634894_gaiyo1">
+<p class="contents">
+<span class="text-secondary">資金種別：</span>共同研究</p>
+<p class="contents">
+</p></div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div style="display:block;" id="inf_education_div_minus">
+<div class="text">
+<div style="display:none;" id="item_jugyo_kamoku_div_plus">
+<input value="1" name="item_jugyo_kamoku_hid" type="hidden">
+<h3 id="item_jugyo_kamoku_1">
+<span class="left">
+  担当授業科目
+  </span>
+</h3>
+</div>
+<div style="display:block;" id="item_jugyo_kamoku_div_minus">
+<h3 id="item_jugyo_kamoku_2">
+<span class="left">
+  担当授業科目
+  </span>
+</h3>
+<div class="cv_item_frame ml-lg-4" id="jugyo_kamoku">
+<ul>
+<li>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="title">専門英語</p>
+<p xmlns:xalan="http://xml.apache.org/xalan" class="contents">
+<span class="span_ym">2024年10月</span>
+<span class="span_tilde">-</span>
+<span class="span_ym">2025年3月</span>
+      &nbsp;
+    後期</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<p class="copyright">COPYRIGHT © KYUSHU UNIVERSITY. ALL RIGHTS RESERVED.</p>
+</div>
+</div>
+
+
+</body></html>
