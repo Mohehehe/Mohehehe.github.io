@@ -19,7 +19,10 @@
 
         body {
             font-family: 'Noto Sans JP', sans-serif;
-            background-color: #f5f5f5;
+            background-image: url('単一細胞・細菌解析法の開発-001.jpg'); /* Set the background image */
+            background-size: cover; /* Ensure the image covers the entire background */
+            background-position: center; /* Center the image */
+            background-attachment: fixed; /* Make the background fixed */
             color: #333;
             line-height: 1.6;
         }
@@ -33,11 +36,14 @@
         /* Header styles */
         .header {
             text-align: center;
-            margin-bottom: 3rem;
-            padding: 2rem 0;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10rem; /* ヘッダーとインデックスの間に余白を追加 */
+            padding: 4rem 0; /* 縦幅を広げるためにパディングを増加 */
+            background-image: url('cover.jpg'); /* 背景画像をcover.jpgに設定 */
+            background-size: cover;
+            background-position: center;
+            background-color: rgba(0, 0, 0, 0.5); /* 背景色を濃くするために黒のオーバーレイを追加 */
+            background-blend-mode: darken; /* 背景画像と色をブレンド */
+            color: #fff; /* テキストを白にして見やすく */
         }
 
         h1 {
@@ -51,20 +57,67 @@
             color: #666;
         }
 
+        .research-description {
+            background-color: transparent; /* 背景の白色四角形を削除 */
+            font-size: 1em; /* 英語の紹介文と同じ文字サイズに調整 */
+            text-align: left; /* 元の配置に戻す */
+            line-height: 1.6; /* 元の行間に戻す */
+            margin: 0; /* 元の余白に戻す */
+            max-width: none; /* 最大幅の制限を解除 */
+        }
+
+        .research-description::after {
+            content: "半導体分野における微細加工技術を駆使して作製したマイクロ・ナノ空間を、生体関連物質や細胞の計測・診断の「場」として用いることで、新しいバイオ分析技術を創出すべく研究開発を行っています。最終的にはこのようなLab-on-a-Chip（µTAS）という分析技術をさらに拡張して、生命（生命現象）をチップ上で人工的に再現できるようなLife-on-a-Chipの創成を目指しています。";
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 1rem;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            display: none;
+            z-index: 10;
+        }
+
+        .research-description:hover::after {
+            content: "半導体分野における微細加工技術を駆使して作製したマイクロ・ナノ空間を、生体関連物質や細胞の計測・診断の「場」として用いることで、新しいバイオ分析技術を創出すべく研究開発を行っています。最終的にはこのようなLab-on-a-Chip（µTAS）という分析技術をさらに拡張して、生命（生命現象）をチップ上で人工的に再現できるようなLife-on-a-Chipの創成を目指しています。";
+            position: absolute;
+            top: 0; /* 英語の文章と同じ位置に表示 */
+            left: 0;
+            width: 100%; /* 英語の文章の横幅に合わせる */
+            height: 100%; /* 英語の文章の縦幅に合わせる */
+            color: #333;
+            background-color: transparent; /* 背景を透明に設定 */
+            padding: 0; /* パディングを削除 */
+            font-size: 1em; /* 英語の文章と同じ文字サイズに調整 */
+            line-height: 1.6; /* 行間を英語の文章と一致させる */
+            display: flex; /* 表示をフレックスボックスに */
+            align-items: center; /* 垂直方向で中央揃え */
+            justify-content: center; /* 水平方向で中央揃え */
+            z-index: 10;
+        }
+
+        .research-description:hover {
+            color: transparent; /* 英語の紹介文を消す */
+        }
+
         /* Navigation styles */
         .navigation {
-            background-color: #fff;
-            border-radius: 10px;
-            padding: 2rem;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: transparent; /* Removed the white background */
+            box-shadow: none; /* Removed the shadow */
+            padding: 0; /* Adjusted padding to remove extra space */
         }
 
         .nav-list {
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
-            width: 100%;
+            gap: 0.8rem; /* インデックス間の間隔を縮小 */
+            width: 100%; /* 横幅を元の全幅に戻す */
+            margin: 0; /* 中央揃えを解除 */
         }
 
         .nav-item {
@@ -77,19 +130,22 @@
         }
 
         .nav-link {
+            height: 80px; /* 縦幅を縮小 */
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             text-decoration: none;
-            padding: 2.5rem 1.5rem;
+            padding: 1.5rem 1rem; /* パディングを調整 */
             background-color: #f8f9fa;
             border-radius: 8px;
             transition: all 0.3s ease;
             border: 1px solid #e0e0e0;
             color: #333;
             width: 100%;
-            align-items: center;
-            justify-content: center;
+            align-items: center; /* 中央揃え */
+            justify-content: center; /* 中央揃え */
             position: relative;
+            font-size: 1rem; /* フォントサイズを少し小さく */
         }
 
         .nav-link::before {
@@ -103,32 +159,32 @@
         }
 
         .nav-item:nth-child(1) .nav-link::before {
-            background-color: #1a237e; /* 濃い青 - ホーム */
+            background-color: #556B2F; /* ダークオリーブグリーン */
         }
 
         .nav-item:nth-child(2) .nav-link::before {
-            background-color: #4a148c; /* 濃い紫 - 研究内容 */
+            background-color: #4682B4; /* スチールブルー */
         }
 
         .nav-item:nth-child(3) .nav-link::before {
-            background-color: #006064; /* 濃い青緑 - 研究業績 */
+            background-color: #6B8E23; /* オリーブドラブ */
         }
 
         .nav-item:nth-child(4) .nav-link::before {
-            background-color: #bf360c; /* 濃いオレンジ - メンバー */
+            background-color: #5F9EA0; /* キャデットブルー */
         }
 
         .nav-item:nth-child(5) .nav-link::before {
-            background-color: #1b5e20; /* 濃い緑 - 写真 */
+            background-color: #2E8B57; /* シーグリーン */
         }
 
         .nav-item:nth-child(6) .nav-link::before {
-            background-color: #311b92; /* 濃い紫 - お問い合わせ */
+            background-color: #2F4F4F; /* ダークスレートグレー */
         }
 
         .nav-text-en {
             display: block;
-            font-size: 3.5rem;
+            font-size: 2.5rem; /* 英語テキストのサイズを縮小 */
             color: #1a237e;
             transition: all 0.3s ease;
             width: 100%;
@@ -139,11 +195,13 @@
             transform: scaleX(1.1);
             transform-origin: center;
             line-height: 1.2;
+            position: relative;
+            left: 1cm; /* 文字だけを右に移動 */
         }
 
         .nav-text {
             display: block;
-            font-size: 3rem;
+            font-size: 2rem; /* 日本語テキストのサイズを縮小 */
             font-weight: 700;
             margin-top: 0.5rem;
             transition: all 0.3s ease;
@@ -158,27 +216,27 @@
         }
 
         .nav-item:nth-child(1) .nav-link:hover {
-            background-color: #1a237e;
+            background-color: #556B2F;
         }
 
         .nav-item:nth-child(2) .nav-link:hover {
-            background-color: #4a148c;
+            background-color: #4682B4;
         }
 
         .nav-item:nth-child(3) .nav-link:hover {
-            background-color: #006064;
+            background-color: #6B8E23;
         }
 
         .nav-item:nth-child(4) .nav-link:hover {
-            background-color: #bf360c;
+            background-color: #5F9EA0;
         }
 
         .nav-item:nth-child(5) .nav-link:hover {
-            background-color: #1b5e20;
+            background-color: #2E8B57;
         }
 
         .nav-item:nth-child(6) .nav-link:hover {
-            background-color: #311b92;
+            background-color: #2F4F4F;
         }
 
         .nav-link:hover .nav-text {
@@ -217,6 +275,48 @@
 
             .nav-link {
                 padding: 1rem;
+                font-size: 1.1rem; /* 文字サイズを少し小さく調整 */
+                line-height: 1.4; /* 行間を少し狭く調整 */
+            }
+
+            .nav-text-en {
+                font-size: 1.8rem; /* 英語テキストのサイズを調整 */
+            }
+
+            .nav-text {
+                font-size: 1.6rem; /* 日本語テキストのサイズを調整 */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-link {
+                height: 60px; /* 縦幅を縮小してスマホ画面に収まるように調整 */
+                font-size: 0.8rem; /* フォントサイズを調整 */
+                padding: 0.5rem; /* パディングを調整 */
+            }
+
+            .nav-list {
+                gap: 0.5rem; /* インデックス間の間隔を縮小 */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .research-intro {
+                padding-top: 2rem; /* スマホでの余白を調整 */
+                padding-bottom: 2rem;
+                text-align: justify; /* 読みやすいように両端揃え */
+            }
+
+            .research-description {
+                font-size: 0.8rem; /* 文字サイズを小さく調整 */
+                line-height: 1.5; /* 行間を調整して視認性を向上 */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .research-intro {
+                top: 40%; /* 紹介文をさらに上に移動 */
+                transform: translate(-50%, -50%); /* 中央揃えを維持 */
             }
         }
 
@@ -305,6 +405,69 @@
         .header-link:hover {
             opacity: 0.8;
         }
+
+        .header-title {
+            color: #fff; /* Kaji Research Groupの文字を白色に設定 */
+        }
+
+        .header-subtitle {
+            color: #fff; /* Department of Applied Chemistry, Kyushu Universityの文字を白色に設定 */
+        }
+
+        .nav-item:nth-child(3) .nav-link {
+            padding: 2rem; /* 上下左右の余白を均等に設定 */
+            text-align: center; /* テキストを中央揃え */
+            margin-left: 0; /* 四角形を他のインデックスと揃えるために左側に移動 */
+        }
+
+        .research-intro {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 55%; /* 紹介文を中間の位置に移動 */
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 100%;
+            max-width: 80%; /* ヘッダーの横幅に文章の1行の幅を合わせる */
+            margin: 0 auto; /* 中央揃え */
+            padding-top: 4rem; /* ヘッダーとの余白を二倍に調整 */
+            padding-bottom: 4rem; /* インデックスとの余白を二倍に調整 */
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .news-item {
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, color 0.3s ease; /* 背景色と文字色の変化をスムーズに */
+        }
+
+        .news-item:hover {
+            background-color: #90caf9; /* 背景色を薄い青色に変更 */
+            color: #fff; /* 文字色を白色に変更 */
+        }
+
+        .news-item {
+            opacity: 1; /* 常に表示 */
+            transform: none; /* 位置を変更しない */
+            transition: none; /* アニメーションを無効化 */
+        }
     </style>
 </head>
 <body>
@@ -316,52 +479,178 @@
 
     <div class="container">
         <header class="header">
-            <a href="homepage2.html" class="header-link">
-                <h1>加地研究室</h1>
-                <p class="subtitle">Kaji Research Group</p>
-            </a>
+            <h1 class="header-title">Kaji Research Group</h1>
+            <p class="header-subtitle">Department of Applied Chemistry, Kyushu University</p>
         </header>
+
+        <section class="research-intro">
+            <p class="research-description">
+            <br>
+            <br>  
+                We are conducting research and development to create new bioanalytical technologies by using micro/nano spaces fabricated with microfabrication technologies in the field of semiconductors as a "field" for the measurement and diagnosis of biological molecules, organelles, and cells. Our goal is to extend the Lab-on-a-Chip (µTAS) analytical technology to a Life-on-a-Chip that can artificially reproduce phenomena of life on a chip and create a next-generation analytical chemistry that can contribute to an understanding of life sciences.
+            </p>
+            <br>
+            <br>
+            <br>
+        </section>
 
         <nav class="navigation">
             <ul class="nav-list">
                 <li class="nav-item">
-                    <a href="Kaji Research Group - Research.html" class="nav-link">
+                    <a href="research.html" class="nav-link">
                         <span class="nav-text">研究内容</span>
                         <span class="nav-text-en">Research</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="Kaji Research Group - Publications.html" class="nav-link">
+                    <a href="publications.html" class="nav-link">
                         <span class="nav-text">研究業績</span>
                         <span class="nav-text-en">Publications</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="Kaji Research Group - Conference presentation.html" class="nav-link">
+                    <a href="conference presentation.html" class="nav-link">
                         <span class="nav-text">学会発表</span>
                         <span class="nav-text-en">Conference Presentation</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="Kaji Research Group - People.html" class="nav-link">
+                    <a href="members.htm" class="nav-link">
                         <span class="nav-text">メンバー</span>
                         <span class="nav-text-en">Members</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="Kaji Research Group - Photo.html" class="nav-link">
+                    <a href="photo.html" class="nav-link">
                         <span class="nav-text">写真</span>
                         <span class="nav-text-en">Photos</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="Kaji Research Group - Contact Info.html" class="nav-link">
+                    <a href="contact.html" class="nav-link">
                         <span class="nav-text">お問い合わせ</span>
                         <span class="nav-text-en">Contact</span>
                     </a>
                 </li>
             </ul>
         </nav>
+
+        <section class="welcome" style="text-align: center; margin: 50px auto;">
+            <h2 style="font-size: 2.5rem;">Welcome to the Kaji Research Group Website!!</h2>
+            <img src="Kaji lab picture.jpg" alt="Kaji Lab Picture" style="margin: 20px auto; display: block; max-width: 80%; height: auto;">
+            <div class="annual-schedule">
+                <h3>加地研年間行事</h3>
+                <table style="margin: 0 auto; border-collapse: collapse; width: 80%;">
+                    <thead>
+                        <tr>
+                            <th style="border: 1px solid #ddd; padding: 8px; background-color: #f2f2f2;">月</th>
+                            <th style="border: 1px solid #ddd; padding: 8px; background-color: #f2f2f2;">行事</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;">4月</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">親和会、ソフトボール大会</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;">5月</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">CHEMINAS、分析化学討論会、新入生歓迎コンパ</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;">6月</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">化学関連支部合同九州大会</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;">7月</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">ひたすら研究</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;">8月</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">中間報告会（M2）、テーマ説明会（M1）、大学院入試（M2, B4）</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;">9月</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">分析化学会年会、院試お疲れ様会、大掃除</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;">10月</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">microTAS、研究</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;">11月</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">CHEMINAS、ひたすら研究</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;">12月</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">忘年会</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;">1月</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">ひたすら研究</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;">2月</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">修士・学士試問会（M2, B4）</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;">3月</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">化学会年会、追い出しコンパ、卒業式</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="news" style="margin: 50px auto;">
+            <h3 style="text-align: center; font-size: 2rem;">What's New!</h3>
+            <div class="news-container" style="overflow: hidden; position: relative;">
+                <div class="news-item" style="animation: slideIn 1s ease-out;">
+                    <p><strong>2025.4.7</strong></p>
+                    <p>Welcome aboard, new members!</p>
+                    <p>新B4の5名が研究室に配属されました。</p>
+                </div>
+                <div class="news-item" style="animation: slideIn 1s ease-out;">
+                    <p><strong>2025.3.25</strong></p>
+                    <p>The graduation ceremony is held and the six graduates and the four undergraduates have completed their courses.</p>
+                    <p>学位授与式が挙行され、M2の菊谷君、三田君、番野君、奥野君、田中君、B4の岡野君、金子君、渡邉さん、日髙君、國竹君、石村君が門出を迎えました。</p>
+                </div>
+                <div class="news-item" style="animation: slideIn 1s ease-out;">
+                    <p><strong>2024.6.29</strong></p>
+                    <p>Mr. Yoshinaga, Mr. Maeda, and Mr. Tsutsumi gave a poster presentation at The 61th Joint Kyushu Meeting of Chemitry-related Branches held in Kitakyushu.</p>
+                    <p>義永君（M1 ）、前田君（M1 ）、堤君（M1 ）が、第61回化学関連支部合同九州大会でポスター発表を行いました。</p>
+                </div>
+                <div class="news-item" style="animation: slideIn 1s ease-out;">
+                    <p><strong>2024.6.4</strong></p>
+                    <p>Ms. Terasaka has joined as an administrative assistant.</p>
+                    <p>事務補佐員として、寺坂さんが着任しました。</p>
+                </div>
+                <div class="news-item" style="animation: slideIn 1s ease-out;">
+                    <p><strong>2024.4.25</strong></p>
+                    <p>The paper titled "An initial study of cell separation based on mechanical properties using a sponge-like monolithic polymer" has been accepted in Talanta Open. This work was conducted in collaboration with Prof. Kubo and Dr. Tanigawa in Kyoto University.</p>
+                    <p>辻君（2022年度修士卒）と堤君（2023年度学士卒）の論文が、Talanta Open誌にアクセプトされました。久保先生・谷川博士（京都大学）との共同研究成果です。</p>
+                </div>
+                <div class="news-item" style="animation: slideIn 1s ease-out;">
+                    <p><strong>2024.4.8</strong></p>
+                    <p>Welcome aboard, new members!</p>
+                    <p>新B4の5名が研究室に配属されました。</p>
+                </div>
+                <div class="news-item" style="animation: slideIn 1s ease-out;">
+                    <p><strong>2024.3.28</strong></p>
+                    <p>We hosted the Baba Conference, which was attended by over 200 teachers, alumni, and business professionals. We would like to thank the many people who attended.</p>
+                    <p>Baba Conferenceを主催し、200名余りの先生方、卒業生、企業関係者の皆様にご参加いただきました。多くの方にご参加頂き、感謝申し上げます。</p>
+                </div>
+                <div class="news-item" style="animation: slideIn 1s ease-out;">
+                    <p><strong>2024.3.25</strong></p>
+                    <p>The graduation ceremony is held and the six graduates and the four undergraduates have completed their courses.</p>
+                    <p>学位授与式が挙行され、M2の稲吉君、植本君、郷君、野見山君、山川君、山地君、B4の田中君、堤君、前田君、義永君が門出を迎えました。</p>
+                </div>
+                <div class="news-item" style="animation: slideIn 1s ease-out;">
+                    <p><strong>2024.2.27</strong></p>
+                    <p>Prof. Kaji gave an invited lecture at PITTCON2024.</p>
+                    <p>加地先生が、PITTCON2024にて招待講演を行いました。</p>
+                </div>
+            </div>
+        </section>
 
         <footer class="footer">
             <p>&copy; 2024 Kaji Research Group - All Rights Reserved</p>
@@ -387,5 +676,15 @@
             });
         });
     </script>
+    <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const newsItems = document.querySelectorAll('.news-item');
+
+                // 全てのニュース項目を即座に表示
+                newsItems.forEach(item => {
+                    item.classList.add('visible');
+                });
+            });
+        </script>
 </body>
 </html>
