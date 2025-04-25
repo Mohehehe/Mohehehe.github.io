@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Members - Kaji Research Group</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #5F9EA0; /* キャデットブルーベースの背景 */
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #000000; /* 黒色 */
+        }
+
+        h2 {
+            color: #4682B4; /* スチールブルー */
+            border-bottom: 2px solid #87CEEB; /* スカイブルー */
+            padding-bottom: 0.5rem;
+        }
+
+        p {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #000000; /* 黒色 */
+            border-top: 1px solid #000000; /* 黒色の線 */
+            border-bottom: 1px solid #000000; /* 黒色の線 */
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .member {
+            margin-bottom: 1rem;
+        }
+
+        .member span {
+            display: block;
+        }
+
+        .email {
+            font-style: italic;
+            color: #2F4F4F;
+        }
+
+        .thesis {
+            display: inline-block;
+            margin-left: 10px;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .member.in-view .thesis {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .graduation-year {
+            cursor: pointer;
+            color: black;
+            transition: color 0.3s ease;
+        }
+
+        .graduation-year:hover {
+            color: gray; /* カーソルを合わせたときの色 */
+        }
+
+        .graduation-year.active {
+            color: blue; /* クリック後の色を青色に変更 */
+        }
+
+        .alumni-details {
+            display: none;
+            margin-left: 20px;
+        }
+
+        .alumni-details.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <nav style="background-color: #333; padding: 10px;">
+        <ul style="list-style: none; margin: 0; padding: 0; display: flex; justify-content: center;">
+            <li style="margin: 0 15px;"><a href="index.html" style="color: white; text-decoration: none;">Home</a></li>
+            <li style="margin: 0 15px;"><a href="research.html" style="color: white; text-decoration: none;">Research</a></li>
+            <li style="margin: 0 15px;"><a href="publications.html" style="color: white; text-decoration: none;">Publications</a></li>
+            <li style="margin: 0 15px;"><a href="conference presentation.html" style="color: white; text-decoration: none;">Conference</a></li>
+            <li style="margin: 0 15px;"><a href="members.htm" style="color: white; text-decoration: none;">Members</a></li>
+            <li style="margin: 0 15px;"><a href="photo.html" style="color: white; text-decoration: none;">Photos</a></li>
+            <li style="margin: 0 15px;"><a href="contact.html" style="color: white; text-decoration: none;">Contact</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1 style="text-align: center; color: #000000;">Members</h1>
+        <p style="text-align: center; font-size: 0.9rem; color: #000000; border-top: 1px solid #000000; border-bottom: 1px solid #000000;">Kaji Research Group</p>
+
+        <div class="section">
+            <h2>Faculty</h2>
+            <div class="member">
+                <span><strong>Professor</strong></span>
+                <span><a href="Kaji.html">Noritada Kaji, Ph. D. 加地 範匡 (CV)</a></span>
+                <span>West3 Room 403</span>
+                <span class="email">kaji@cstf.kyushu-u.ac.jp</span>
+            </div>
+            <div class="member">
+                <span><strong>Associate Professor</strong></span>
+                <span><a href="zaitu.html">Shinichi Zaitsu, Ph. D. 財津 慎一</a></span>
+                <span>West3 Room 402</span>
+            </div>
+            <div class="member">
+                <span><strong>Assistant Professor</strong></span>
+                <span><a href="leong.html">Iat Wai Leong, Ph. D. 梁 逸偉</a></span>
+                <span>West3 Room 410</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Postdoctoral Researchers</h2>
+            <div class="member">
+                <span>Chang-Ming Wang, Ph. D. 王昌民</span>
+                <span>(National Taiwan University, 国立台湾大学, from July 1, 2022)</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Graduate Students</h2>
+            <h3>Master's students</h3>
+            <div class="member">
+                Shunya Tanaka 田中 竣也 (M2)
+                <span class="thesis">卒論：「非公開」</span>
+            </div>
+            <div class="member">
+                Yusei Tsutsumi 堤 悠生 (M2)
+                <span class="thesis">卒論：「スポンジモノリスカラムによる細胞分離法の初期検討」</span>
+            </div>
+            <div class="member">
+                Haruki Maeda 前田 陽樹 (M2)
+                <span class="thesis">卒論：「腸内細菌と細胞の共培養環境構築に向けたPDMS多孔膜の作製」</span>
+            </div>
+            <div class="member">
+                Harumo Yoshinaga 義永 晴雲 (M2)
+                <span class="thesis">卒論：「レーザーアブレーションを利用したPDMSステンシル作製法の開発」</span>
+            </div>
+            <div class="member">
+                Tomoki Kaneko 金子 知輝 (M1)
+                <span class="thesis">卒論：「マイクロ流体デバイスを用いた脂質ナノ粒子作製に関する研究」</span>
+            </div>
+            <div class="member">
+                Moe Watanabe 渡邉 萌 (M1)
+                <span class="thesis">卒論：「表面特性の違いを利用した液滴分離法の開発と単一細胞分析への応用」</span>
+            </div>
+            <div class="member">
+                Ryoo Hidaka 日髙 凌央 (M1)
+                <span class="thesis">卒論：「腸管上皮表面の粘液層再現とその細菌反形成への影響」</span>
+            </div>
+            <div class="member">
+                Yusuke Kunitake 國竹 裕亮 (M1)
+                <span class="thesis">卒論：「マイクロ流体デバイスを用いた電気的・光学的物性同時計測システムの開発」</span>
+            </div>
+            <div class="member">
+                Koushi Ishimura 石村 晃司 (M1)
+                <span class="thesis">卒論：「非線形共振器リングダウン分光法によるガス分析法の開発」</span>
+            </div>
+
+            <h3>Undergraduates</h3>
+            <div class="member">Ryota Utatsu 宇田津 良太 (B4)</div>
+            <div class="member">Shunsuke Kisu 木須 駿介 (B4)</div>
+            <div class="member">Haruna Tanabe 田邉 陽奈 (B4)</div>
+            <div class="member">Shugo Shimada 嶋田 脩悟 (B4)</div>
+            <div class="member">Haruto Tashiro 田代 陽斗 (B4)</div>
+        </div>
+
+        <div class="section">
+            <h2>Technical Staffs</h2>
+            <div class="member">Sachiko Ide 井手 幸子</div>
+        </div>
+
+        <div class="section">
+            <h2>Administrative Assistants</h2>
+            <div class="member">Sayaka Terasaka 寺坂 清香</div>
+        </div>
+
+        <div class="section">
+            <h2>Alumni</h2>
+            <div class="alumni">
+                <h3 class="graduation-year" data-year="2025">the 2024 academic year</h3>
+                <div class="alumni-details" id="details-2025">
+                    <div>・ Shoma Okuno 奥野 将真 (M2)「イムノピラーと ICP 濃縮機構を統合した高感度バイオマーカー検出デバイスの開発」</div>
+                    <div>・ Rion Kikutani 菊谷 吏音 (M2)「マイクロ流体デバイスを用いた細胞核の抽出と変形能計測」</div>
+                    <div>・ Tomoki Sanda 三田 智己 (M2)「紫外超短パルス光を用いたファイバー増強ラマン分光法の開発」</div>
+                    <div>・ Yuto Banno 番野 雄斗 (M2)「凍結乾燥ハイドロゲルビーズを用いた免疫測定法の開発」</div>
+                    <div>・ Shunya Okano 岡野 隼也 (B4)「連続発振ラマンコムを光源とした超短光パルス列の時間波形制御」</div>
+                </div>
+                <h3 class="graduation-year" data-year="2024">the 2023 academic year</h3>
+                <div class="alumni-details" id="details-2024">
+                    <div>・ Kensei Inayoshi 稲吉 健生 (M2) 「超短パルス励起コヒーレントラマン散乱に基づく中空反共振ファイバー増強ラマン分光法の開発」</div>
+                    <div>・ Kohei Uemoto 植本 航平 (M2) 「共振器増強コヒーレントラマン分光法における分子検出限界の評価」</div>
+                    <div>・ Takashi Go 郷 貴史 (M2) 「自発ラマン散乱光発生における共振器増強効果に関する研究」</div>
+                    <div>・ Takuma Nomiyama 野見山 拓真 (M2) 「単一細胞多能性分析のための抗体修飾流路の開発」</div>
+                    <div>・ Yota Yamakawa 山川 暢太 (M2) 「腸内細菌叢の形成過程評価に向けたマイクロ腸モデルの開発」</div>
+                    <div>・ Ryouki Yamaji 山地 凌輝 (M2) 「連続発振ラマンコムを用いた超短光パルス列の任意波形合成」</div>
+                    <div>・ Niko Kimura 木村 笑 助教（Assistant Professor）(from April 1, 2021 to August 31, 2023)</div>
+                </div>
+                <h3 class="graduation-year" data-year="2023">the 2022 academic year</h3>
+                <div class="alumni-details" id="details-2023">
+                    <div>・ Youstina Mekhail Metias Ibrahim (from Oct. 1, 2021 to Aug. 31, 2022, as a special research student)</div>
+                    <div>・ Mizuki Inoue 井上 瑞基（九州大学-NIMS連携大学院）</div>
+                    <div>・ Fumina Ichibakase 一番ケ瀬 史奈 (修士) (就職)「腸管モデルの構築にむけた細胞と細菌の共培養システムの開発」</div>
+                    <div>・ Yukino Enomoto 榎本 雪乃 (修士) (就職)「　　　　　　　　　　　　　　　　　　　　　　　　　　　　」</div>
+                    <div>・ Yuta Kishimoto 岸本 祐汰 (修士) (就職)「イオン電流センシングを用いた単一マイクロプラスチック分析 」</div>
+                    <div>・ Kengo Tuji 辻 健吾 (修士) (就職)「スポンジモノリスカラムによる細胞の機械的特性に基づいた分離法の開発」</div>
+                    <div>・ Shinya Honda 本田 真也 (修士) (就職)「共振器増強コヒーレントラマン散乱を用いた高感度ガス分析法の開発」</div>
+                    <div>・ Keigo Oka 岡 圭吾(学士) (他大学進学)「単一細胞質量分析イメージングのための細胞アレイ化技術の開発」</div>
+                    <div>・ Nadine Bothen (from Oct. 1, 2022 to Mar. 31, 2023., an exchange student from Johannes Gutenberg University Mainz, as a special auditor)</div>
+                    <div>・ Rumi Sueyoshi 末吉 ルミ (Technical staff)</div>
+                </div>
+                <h3 class="graduation-year" data-year="2022">the 2021 academic year</h3>
+                <div class="alumni-details" id="details-2022">
+                    <div>・ Toshihiro Ito 伊藤 駿宏 (修士) (就職)「単一細胞質量分析イメージングのためのマイクロデバイスの開発」</div>
+                    <div>・ Kosuke Nonaka 野中 宏輔 (修士) (就職)「マイクロ流体デバイスを用いた単一細胞変形能測定における界面相互作用の評価 」</div>
+                    <div>・ Kazuya Fujita 藤田 和弥 (修士) (就職)「エレクトロポレーション法による牛乳由来エクソソーム製剤の開発」</div>
+                    <div>・ Junpei Yamada 山田 純平(修士) (就職)「超短パルス励起ファイバー増強ラマン分光法におけるコヒーレントラマン散乱に関する研究」</div>
+                    <div>・ Kensei Inayoshi 稲吉 健生(学士) (進学)「中空反共振ファイバーを用いたコヒーレントラマン散乱分光法のための広帯域赤外超短パルス光の発生」</div>
+                    <div>・ Yota Yamakawa 山川 暢太(学士) (進学)「腸管の絨毛構造を模倣した三次元構造の作製」</div>
+                    <div>・ Takashi Go 郷 貴史(学士) (進学)「共振器増強自発ラマン分光法における水素回転ラマン光強度の増強効果」</div>
+                    <div>・ Ryouki Yamaji 山地 凌輝(学士) (進学)「光ヘテロダイン干渉法を用いた超高繰り返し超短光パルス列の測定」</div>
+                    <div>・ Takuma Nomiyama 野見山 拓真(学士) (進学)「マイクロ流体デバイスを用いた脂質ナノ粒子の粒径制御と人工エクソソーム作製への展開」</div>
+                    <div>・ Toyohiro Naito 内藤 豊裕 助教（Assistant Professor）(from June 1, 2020 to March 31, 2022)</div>
+                </div>
+                <h3 class="graduation-year" data-year="2021">the 2020 academic year</h3>
+                <div class="alumni-details" id="details-2021">
+                    <div>・ Karin Miura 三浦 夏琳 (修士) (就職)「電流計測デバイスによるマイクロプラスチック分析法の開発」</div>
+                    <div>・ Yuhei Onizuka 鬼塚 侑平 (修士) (就職)「牛乳由来エクソソームを利用した機能性食品の開発」</div>
+                    <div>・ XinYi Qian 銭 欣逸 (修士) (就職)「マイクロ流体デバイスによるハイドロゲルビーズの作製」</div>
+                    <div>・ Shingo Takeyama 竹山 新悟 (修士) (就職)「干渉型非線形自己相関法を用いた超高繰り返し超短光パルス列の時間波形評価」</div>
+                    <div>・ Miyu Terada 寺田 美悠 (修士) (就職)「マイクロ流体デバイスを用いた単一細胞変形能測定によるがん細胞の多能性評価」</div>
+                    <div>・ Fumina Ichibakase 一番ケ瀬 史奈 (学士) (進学)「腸管モデルの構築にむけた共培養技術の開発」</div>
+                    <div>・ Shinya Honda 本田 真也 (学士) (進学)「共振器増強コヒーレントラマン散乱を用いた高感度ガス分析法の開発」</div>
+                    <div>・ Yuta Kishimoto 岸本 祐汰 (学士) (進学)「細胞表面の状態が細胞変形能測定法に与える影響」</div>
+                    <div>・ Kengo Tuji 辻 健吾 (学士) (進学)「細胞外小胞検出のための膨張コールターカウンター法の開発」</div>
+                    <div>・ Yukino Enomoto 榎本 雪乃 (学士) (進学)「細胞内分子夾雑環境における酵素活性評価法の開発」</div>
+                </div>
+                <h3 class="graduation-year" data-year="2020">the 2019 academic year</h3>
+                <div class="alumni-details" id="details-2020">
+                    <div>・ Keichi Taniguchi 谷口 渓一 (修士) (就職)「連続発振分子光変調器の開発」</div>
+                    <div>・ Yoshie Furukawa 古川 佳栄 (修士) (就職)「酵素活性に着目した定量的分子夾雑系分析法の開発」</div>
+                    <div>・ Toshihiro Ito 伊藤 駿宏 (学士) (進学)「SPESIを用いた単一細胞分析のためのマイクロチャンバーの構築」</div>
+                    <div>・ Yukari Kanaoka 金岡 ゆかり (学士) (就職)「周波数安定化半導体レーザーを励起光とした共振器増強ラマン分光法の開発」</div>
+                    <div>・ Kosuke Nonaka 野中 宏輔 (学士) (進学)「細胞変形能測定における界面相互作用の評価」</div>
+                    <div>・ Kazuya Fujita 藤田 和弥 (学士) (進学)「エクソソーム改変に向けたマイクロエレクトロポレーションデバイスの開発」</div>
+                    <div>・ Junpei Yamada 山田 純平 (学士) (進学)「コヒーレントラマン散乱に基づく中空フォトニック結晶ファイバー増強ラマン分光法の開発」</div>
+                    <div>・ Sumiyo Kanafusa 金房 純代 助教（Assistant Professor）(from April 16, 2018 to March 31, 2020)</div>
+                    <div>・ Tomoko Matthews マシューズ 知子 (Technical staff)</div>
+                </div>
+                <h3 class="graduation-year" data-year="2019">the 2018 academic year</h3>
+                <div class="alumni-details" id="details-2019">
+                    <div>・ Takumi Tanabe 田辺 拓巳 (修士) (就職)「中空フォトニック結晶ファイバーを用いた超短パルスレーザー分子光変調器の開発」</div>
+                    <div>・ Karin Miura 三浦 夏琳 (学士) (進学)「九州大学伊都キャンパスにおけるPM2.5の実態調査・分析」</div>
+                    <div>・ Yuhei Onizuka 鬼塚 侑平 (学士) (進学)「細胞外小胞の特性評価とエレクトロポレーション法による内包物制御」</div>
+                    <div>・ XinYi Qian 銭 欣逸 (学士) (進学)「マイクロ流体デバイスによるW/O型液滴の作製とその特性評価」</div>
+                    <div>・ Shingo Takeyama 竹山 新悟 (学士) (進学)「干渉型非線形自己相関法を用いた超高繰り返し超短光パルス列の時間波形評価」</div>
+                    <div>・ Miyu Terada 寺田 美悠 (学士) (進学)「マイクロ流体デバイスによる細胞変形能測定法の開発」</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const members = document.querySelectorAll('.member');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                    }
+                });
+            });
+
+            members.forEach(member => {
+                observer.observe(member);
+            });
+
+            const years = document.querySelectorAll('.graduation-year');
+
+            years.forEach(year => {
+                year.addEventListener('click', function() {
+                    const isActive = this.classList.contains('active');
+
+                    years.forEach(y => y.classList.remove('active'));
+                    document.querySelectorAll('.alumni-details').forEach(detail => detail.classList.remove('active'));
+
+                    if (!isActive) {
+                        this.classList.add('active');
+                        const details = document.querySelector(`#details-${this.dataset.year}`);
+                        if (details) {
+                            details.classList.add('active');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

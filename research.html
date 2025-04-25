@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research - Kaji Research Group</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #556B2F; /* ダークオリーブグリーンベースの背景 */
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Prevent horizontal overflow */
+            overflow-y: auto; /* Allow vertical scrolling */
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #000000; /* 黒色 */
+        }
+
+        p {
+            text-align: justify;
+            font-size: 0.8rem; /* Reduced font size */
+            color: #000000; /* 黒色 */
+        }
+
+        .toggle-container {
+            position: relative;
+            margin-top: 20px;
+        }
+
+        .toggle-container .arrow {
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            margin-left: 10px;
+            font-size: 1.2rem;
+            color: #008000; /* 緑色 */
+            transition: color 0.3s ease;
+        }
+
+        .toggle-container .arrow:hover {
+            color: #006400; /* ダークグリーン */
+        }
+
+        .toggle-container .arrow::before {
+            content: '\2192'; /* Unicode for right arrow */
+            margin-right: 5px;
+        }
+
+        .japanese-text {
+            display: none;
+            margin-top: 10px;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(100%);
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+        }
+
+        .horizontal-scroll {
+            display: flex;
+            align-items: center; /* Center align items vertically */
+            overflow: hidden;
+            position: relative;
+            gap: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            width: 100%;
+            height: 300px;
+        }
+
+        .horizontal-scroll img {
+            flex-shrink: 0;
+            max-height: 300px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            animation: scroll 10s linear infinite;
+        }
+
+        .scrolling-image {
+            flex-shrink: 0;
+            max-height: 100%;
+            animation: scroll 10s linear infinite;
+        }
+
+        .scrolling-image:nth-child(2) {
+            animation-delay: 5s; /* Delay for the second image to follow the first */
+        }
+
+        .image-gallery {
+            display: flex;
+            justify-content: space-around; /* Ensure images are evenly spaced */
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .gallery-image {
+            max-width: 30%; /* Ensure images take up equal width */
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .highlighted-heading {
+            font-size: 1.2rem; /* Reduced font size for English headings */
+            border: 2px solid green;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f0fff0; /* Light green background */
+            cursor: pointer; /* Indicate that the heading is clickable */
+            transition: transform 0.3s ease, color 0.3s ease; /* Smooth transition for size and color */
+        }
+
+        .highlighted-heading:hover {
+            transform: scale(1.1); /* Slightly enlarge the heading on hover */
+            color: #006400; /* Change color on hover to indicate interactivity */
+        }
+
+        .text-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%; /* Ensure full width */
+            height: auto;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* Align text to the left */
+            padding: 0 20px; /* Add padding to ensure text doesn't touch edges */
+            background-color: #ffffff; /* Match the white background of the page */
+        }
+
+        .text-slide {
+            position: relative;
+            width: auto; /* Adjust width to fit content */
+            transition: transform 0.5s ease;
+            white-space: normal; /* Allow text wrapping */
+            z-index: 10;
+            text-align: justify; /* Justify text for better readability */
+            font-size: 1rem; /* Adjust font size for better visibility */
+            line-height: 1.6; /* Improve line spacing */
+            word-wrap: break-word; /* Break long words to prevent overflow */
+        }
+
+        .text-slide.hidden {
+            transform: translateX(-100%);
+        }
+
+        .text-slide.next {
+            transform: translateX(100%);
+        }
+
+        .arrow {
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: #006400;
+            margin-left: 10px;
+            transition: color 0.3s ease;
+            display: inline-block; /* Ensure arrow is visible */
+            z-index: 10; /* Ensure arrow is above the background */
+        }
+
+        .arrow:hover {
+            color: #004d00;
+        }
+
+        h2.highlighted-heading {
+            display: inline-block; /* Ensure the heading takes up only as much width as its content */
+            width: 100%; /* Make the heading span the full width of one line */
+            text-align: center; /* Center align the text within the heading */
+            box-sizing: border-box; /* Include padding and border in the width calculation */
+        }
+    </style>
+</head>
+<body>
+    <nav style="background-color: #333; padding: 10px;">
+        <ul style="list-style: none; margin: 0; padding: 0; display: flex; justify-content: center;">
+            <li style="margin: 0 15px;"><a href="index.html" style="color: white; text-decoration: none;">Home</a></li>
+            <li style="margin: 0 15px;"><a href="research.html" style="color: white; text-decoration: none;">Research</a></li>
+            <li style="margin: 0 15px;"><a href="publications.html" style="color: white; text-decoration: none;">Publications</a></li>
+            <li style="margin: 0 15px;"><a href="conference presentation.html" style="color: white; text-decoration: none;">Conference</a></li>
+            <li style="margin: 0 15px;"><a href="members.htm" style="color: white; text-decoration: none;">Members</a></li>
+            <li style="margin: 0 15px;"><a href="photo.html" style="color: white; text-decoration: none;">Photos</a></li>
+            <li style="margin: 0 15px;"><a href="contact.html" style="color: white; text-decoration: none;">Contact</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>Research</h1>
+        <p style="text-align: center; font-size: 0.9rem; color: #000000; border-top: 1px solid #000000; border-bottom: 1px solid #000000;">Kaji Research Group</p>
+        <div class="image-gallery">
+            <img src="Rtheme1.jpg" alt="Rtheme1" class="gallery-image">
+            <img src="DLD_CMYK_イラスト.jpg" alt="DLD Illustration" class="gallery-image">
+            <img src="Anal Chem 2019 supplementary cover KAJI.jpg" alt="Anal Chem" class="gallery-image">
+        </div>
+        <div class="toggle-container">
+            <p class="english-text">Currently, one in two Japanese people is diagnosed with cancer, and one in three people die of cancer. It is predicted that the number of cancer patients will increase as the aging society progresses. Early detection and early treatment of cancer is strongly desired. At the same time, bacterial infections, such as tuberculosis and other re-emerging infections and drug-resistant bacteria, are also a problem, the development of early detection techniques of infectious diseases is desired as well as cancer. In view of this background, we believe that development of high sensitive (fewer cancer cells), accurate (no false positives), and minimally or non-invasive analytical techniques that reduce the mental and physical burden on patients accompanying blood collection and biopsy is one of our missions as an analytical chemist. In our laboratory, we are trying to develop analytical techniques based on nanobiotechnology to solve such social problems.</p>
+            <span class="arrow" onclick="toggleJapaneseText()">Japanese</span>
+            <p class="japanese-text">現在、日本人の2人に1人ががんを患い、3人に1人ががんで亡くなっています。今後、高齢化社会が進展するに従って、ますますがんの患者数は増加することが予測され、がんの早期発見・早期治療が強く望まれています。また、がんと同時に、結核をはじめとする再興感染症や薬剤耐性菌といった細菌感染症の問題も顕在化してきており、早期検出法の開発も望まれています。このような時代背景を鑑みると、いかに高感度（少ないがん細胞数）で正確（擬陽性のない）、かつ患者さんに精神的・肉体的負担（採血やバイオプシー）の少ない低・非侵襲的分析法を研究・開発して提供するかが、分析化学者としてのひとつの使命であると考えます。当研究室では、このような社会問題解決のために、ナノバイオテクノロジーを駆使した分析法を開発することで挑んでいきたいと思います。</p>
+        </div>
+        <h2 class="highlighted-heading" onclick="toggleSingleCellText()">Development of a single cell and bacterium analysis techniques on a chip</h2>
+        <p>▶単一細胞・細菌解析法の開発</p>
+
+        <h2 class="highlighted-heading" onclick="toggleArtificialCellsText()">Development of fabrication and analysis techniques of artificial cells and extracellular vesicles and their application to bioanalysis, drug discovery and medicine</h2>
+        <p>▶人工細胞・細胞外小胞の作製・解析法の開発とバイオ分析・創薬・医療への応用</p>
+
+        <h2 class="highlighted-heading" onclick="toggleMicrofloraText()">Intestinal microflora analysis on a chip</h2>
+        <p>▶腸内細菌叢研究のためのマイクロ流体デバイス</p>
+
+        <h2 class="highlighted-heading" onclick="toggleLaserLightText()">Research on advanced analytical techniques using laser light</h2>
+        <p>▶レーザー光を用いた最先端分析技術の研究</p>
+        <div class="horizontal-scroll">
+            <!-- Removed all images from the horizontal scroll section -->
+        </div>
+        <div class="text-container">
+            <!-- Removed the text-slide elements to delete the displayed text -->
+        </div>
+    </div>
+    <script>
+        function toggleJapaneseText() {
+            const japaneseText = document.querySelector('.japanese-text');
+            if (japaneseText.style.display === 'none' || japaneseText.style.display === '') {
+                japaneseText.style.display = 'block';
+            } else {
+                japaneseText.style.display = 'none';
+            }
+        }
+
+        function showImage() {
+            const imageContainer = document.createElement('div');
+            imageContainer.style.position = 'fixed';
+            imageContainer.style.top = '0';
+            imageContainer.style.left = '0';
+            imageContainer.style.width = '100%';
+            imageContainer.style.height = '100%';
+            imageContainer.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+            imageContainer.style.display = 'flex';
+            imageContainer.style.justifyContent = 'center';
+            imageContainer.style.alignItems = 'center';
+            imageContainer.style.zIndex = '1000';
+
+            const image = document.createElement('img');
+            image.src = 'single cell.jpg';
+            image.style.maxWidth = '90%';
+            image.style.maxHeight = '90%';
+            image.style.borderRadius = '8px';
+            image.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.5)';
+
+            const closeButton = document.createElement('span');
+            closeButton.textContent = '×';
+            closeButton.style.position = 'absolute';
+            closeButton.style.top = '20px';
+            closeButton.style.right = '20px';
+            closeButton.style.fontSize = '2rem';
+            closeButton.style.color = 'white';
+            closeButton.style.cursor = 'pointer';
+
+            closeButton.addEventListener('click', () => {
+                document.body.removeChild(imageContainer);
+            });
+
+            imageContainer.appendChild(image);
+            imageContainer.appendChild(closeButton);
+            document.body.appendChild(imageContainer);
+        }
+
+        function showImageInSection() {
+            const existingImageContainer = document.querySelector('.image-display-container');
+            if (existingImageContainer) {
+                existingImageContainer.remove(); // Remove existing image container if it exists
+            }
+
+            const imageContainer = document.createElement('div');
+            imageContainer.className = 'image-display-container';
+            imageContainer.style.marginTop = '10px';
+            imageContainer.style.textAlign = 'center';
+
+            const image = document.createElement('img');
+            image.src = 'single cell.jpg';
+            image.style.maxWidth = '90%';
+            image.style.borderRadius = '8px';
+            image.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.5)';
+
+            const headingElement = document.querySelector('.highlighted-heading');
+            headingElement.insertAdjacentElement('afterend', imageContainer);
+            imageContainer.appendChild(image);
+        }
+
+        function toggleImage() {
+            const existingImageContainer = document.querySelector('.image-display-container');
+            if (existingImageContainer) {
+                existingImageContainer.remove(); // Remove the image container if it exists
+            } else {
+                const imageContainer = document.createElement('div');
+                imageContainer.className = 'image-display-container';
+                imageContainer.style.marginTop = '10px';
+                imageContainer.style.textAlign = 'center';
+
+                const image = document.createElement('img');
+                image.src = 'single cell.jpg';
+                image.style.maxWidth = '50%'; /* Match the size of eksoso.jpg */
+                image.style.borderRadius = '8px';
+                image.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.5)';
+
+                const headingElement = document.querySelector('.highlighted-heading');
+                headingElement.insertAdjacentElement('afterend', imageContainer);
+                imageContainer.appendChild(image);
+            }
+        }
+
+        function toggleImageAndText() {
+            const existingContainer = document.querySelector('.image-text-display-container');
+            if (existingContainer) {
+                existingContainer.remove(); // Remove the container if it exists
+            } else {
+                const container = document.createElement('div');
+                container.className = 'image-text-display-container';
+                container.style.marginTop = '10px';
+                container.style.textAlign = 'center';
+
+                const image = document.createElement('img');
+                image.src = 'single cell.jpg';
+                image.style.maxWidth = '50%'; /* Match the size of eksoso.jpg */
+                image.style.borderRadius = '8px';
+                image.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.5)';
+                image.style.display = 'block';
+                image.style.margin = '0 auto';
+
+                const text = document.createElement('p');
+                text.textContent = `Recently, information from cells and bacteria, such as gene sequence information, can be analyzed relatively easily and inexpensively. However, these are mostly destructive analysis techniques that irreversibly destroy cells and other components. Therefore, it is impossible to apply regenerative medicine which requires the quality assurance of stem cells before cell transplantation. In this research, we are developing a microfluidic device that can diagnose cells by "touching" them, with non-staining and non-destructive operation. This single-cell palpation device can create a novel analytical technique that contribute to advanced medical treatment.`;
+                text.style.marginTop = '10px';
+                text.style.fontSize = '1rem';
+                text.style.lineHeight = '1.6';
+                text.style.color = '#333';
+
+                const headingElement = document.querySelector('.highlighted-heading');
+                headingElement.insertAdjacentElement('afterend', container);
+                container.appendChild(image);
+                container.appendChild(text);
+            }
+        }
+
+        function slideText() {
+            const currentText = document.querySelector('.text-slide.current');
+            const nextText = document.querySelector('.text-slide.next');
+
+            if (currentText && nextText) {
+                currentText.classList.add('hidden');
+                currentText.classList.remove('current');
+
+                nextText.classList.remove('next');
+                nextText.classList.add('current');
+            }
+        }
+
+        function toggleTextDisplay() {
+            let textContainer = document.querySelector('.text-container');
+
+            if (!textContainer) {
+                textContainer = document.createElement('div');
+                textContainer.className = 'text-container';
+                textContainer.style.marginTop = '10px';
+                textContainer.style.textAlign = 'center';
+
+                const currentText = document.createElement('div');
+                currentText.className = 'text-slide current';
+                currentText.textContent = `Recently, information from cells and bacteria, such as gene sequence information, can be analyzed relatively easily and inexpensively. However, these are mostly destructive analysis techniques that irreversibly destroy cells and other components. Therefore, it is impossible to apply regenerative medicine which requires the quality assurance of stem cells before cell transplantation. In this research, we are developing a microfluidic device that can diagnose cells by "touching" them, with non-staining and non-destructive operation. This single-cell palpation device can create a novel analytical technique that contribute to advanced medical treatment.`;
+
+                const arrow = document.createElement('span');
+                arrow.className = 'arrow';
+                arrow.textContent = '▶';
+                arrow.onclick = slideText;
+                currentText.appendChild(arrow);
+
+                const nextText = document.createElement('div');
+                nextText.className = 'text-slide next hidden';
+                nextText.textContent = `細胞や細菌が有する情報、例えば遺伝子配列情報などは、比較的簡単かつ低コストで分析できる時代になりました。しかしながら、これらはほとんどが細胞などを破壊する破壊分析法であり、再生医療などにおける細胞の品質保証などに適用することはできません。そこで本研究では、細胞を「触って診断」できるようなマイクロ流体デバイスを開発し、非染色・非破壊な単一細胞解析法を開発し、先進医療に貢献する分析技術の創成に取り組んでいます。`;
+
+                textContainer.appendChild(currentText);
+                textContainer.appendChild(nextText);
+
+                const headingElement = document.querySelector('.highlighted-heading');
+                headingElement.insertAdjacentElement('afterend', textContainer);
+            } else {
+                textContainer.remove();
+            }
+        }
+
+        function toggleSingleCellText() {
+            const existingText = document.querySelector('.single-cell-text');
+            if (existingText) {
+                existingText.remove();
+            } else {
+                const textContainer = document.createElement('div');
+                textContainer.className = 'single-cell-text';
+                textContainer.style.marginTop = '10px';
+                textContainer.style.padding = '10px';
+                textContainer.style.backgroundColor = '#f9f9f9';
+                textContainer.style.border = '1px solid #ddd';
+                textContainer.style.borderRadius = '5px';
+
+                const image = document.createElement('img');
+                image.src = 'single cell.jpg';
+                image.alt = 'Single Cell';
+                image.style.display = 'block';
+                image.style.margin = '0 auto 10px';
+                image.style.maxWidth = '50%'; /* Match the size of eksoso.jpg */
+                image.style.borderRadius = '8px';
+
+                const englishText = document.createElement('p');
+                englishText.textContent = `Recently, information from cells and bacteria, such as gene sequence information, can be analyzed relatively easily and inexpensively. However, these are mostly destructive analysis techniques that irreversibly destroy cells and other components. Therefore, it is impossible to apply regenerative medicine which requires the quality assurance of stem cells before cell transplantation. In this research, we are developing a microfluidic device that can diagnose cells by "touching" them, with non-staining and non-destructive operation. This single-cell palpation device can create a novel analytical technique that contribute to advanced medical treatment.`;
+                englishText.style.marginBottom = '10px';
+
+                const japaneseText = document.createElement('p');
+                japaneseText.textContent = `細胞や細菌が有する情報、例えば遺伝子配列情報などは、比較的簡単かつ低コストで分析できる時代になりました。しかしながら、これらはほとんどが細胞などを破壊する破壊分析法であり、再生医療などにおける細胞の品質保証などに適用することはできません。そこで本研究では、細胞を「触って診断」できるようなマイクロ流体デバイスを開発し、非染色・非破壊な単一細胞解析法を開発し、先進医療に貢献する分析技術の創成に取り組んでいます。`;
+
+                textContainer.appendChild(image);
+                textContainer.appendChild(englishText);
+                textContainer.appendChild(japaneseText);
+
+                const heading = document.querySelector('.highlighted-heading');
+                heading.insertAdjacentElement('afterend', textContainer);
+            }
+        }
+
+        function toggleArtificialCellsText() {
+            const existingText = document.querySelector('.artificial-cells-text');
+            if (existingText) {
+                existingText.remove();
+            } else {
+                const textContainer = document.createElement('div');
+                textContainer.className = 'artificial-cells-text';
+                textContainer.style.marginTop = '10px';
+                textContainer.style.padding = '10px';
+                textContainer.style.backgroundColor = '#f9f9f9';
+                textContainer.style.border = '1px solid #ddd';
+                textContainer.style.borderRadius = '5px';
+
+                const image = document.createElement('img');
+                image.src = 'eksoso.jpg';
+                image.alt = 'Eksoso';
+                image.style.display = 'block';
+                image.style.margin = '0 auto 10px';
+                image.style.maxWidth = '50%';
+                image.style.borderRadius = '8px';
+
+                const englishText = document.createElement('p');
+                englishText.textContent = `Since extracellular vesicles (EVs) sized from 50 nm to a few micrometers in diameter released by the cell contains nucleic acids and proteins and are abundant in body fluids, particularly exosomes which are easy to collect in a minimally invasive manner have attracted much attention as a possible new disease biomarker. However, there are no established methodologies for extraction and evaluation, and moreover, their heterogeneity make it increasingly difficult to analyze. In this research we are developing a new technique to separate and detect EVs based on their properties, and characterize their contents at a single EVs level. After the analysis, recovering techniques for only useful EVs are also developed toward medical applications.`;
+                englishText.style.marginBottom = '10px';
+
+                const japaneseText = document.createElement('p');
+                japaneseText.textContent = `細胞が放出する直径約50 nmから数mmの細胞外小胞（EV）は、起源となる細胞の核酸やタンパク質を含有し、全身の体液中に豊富に存在するため、特にエクソソームが低侵襲に採取可能な新しい疾患バイオマーカーとして期待を集めています。しかしながら、抽出法や評価法などに確立された方法論がない上、heterogeneityの高い物質であるため、新しい解析法が求められています。そこで本研究では、EVの「粒子」としての性質と「内包物」情報を単一EVレベルで検知できるデバイスを開発し、有用なEVだけを回収して医療応用できるデバイス開発を行っています。`;
+
+                textContainer.appendChild(image);
+                textContainer.appendChild(englishText);
+                textContainer.appendChild(japaneseText);
+
+                const heading = document.querySelector('.highlighted-heading:nth-of-type(2)');
+                heading.insertAdjacentElement('afterend', textContainer);
+            }
+        }
+
+        function toggleMicrofloraText() {
+            const existingText = document.querySelector('.microflora-text');
+            if (existingText) {
+                existingText.remove();
+            } else {
+                const textContainer = document.createElement('div');
+                textContainer.className = 'microflora-text';
+                textContainer.style.marginTop = '10px';
+                textContainer.style.padding = '10px';
+                textContainer.style.backgroundColor = '#f9f9f9';
+                textContainer.style.border = '1px solid #ddd';
+                textContainer.style.borderRadius = '5px';
+
+                const image = document.createElement('img');
+                image.src = 'virus.jpg';
+                image.alt = 'Virus';
+                image.style.display = 'block';
+                image.style.margin = '0 auto 10px';
+                image.style.maxWidth = '50%';
+                image.style.borderRadius = '8px';
+
+                const englishText = document.createElement('p');
+                englishText.textContent = `The numerous bacteria inhabit in our intestine and they are essential for maintaining our good health. However, the details of the colonization process in a human intestine have not been revealed. In order to investigate when, where, and how bacteria colonize in an intestine, we have been developing a bacterial culture environment similar to the human intestine.`;
+                englishText.style.marginBottom = '10px';
+
+                const japaneseText = document.createElement('p');
+                japaneseText.textContent = `私たちの腸内に棲息する無数の細菌たちの機能を活用することで，私たちは健康な生活を送っています。しかし，この菌の共生環境が形成されるまでの過程についてはよく知られていません。本研究では，微細加工技術を利用して腸内に似た環境を作製し，体内で細菌がいつ，どこで，どのように住み着くのかを観察する手法の開発を目指しています。`;
+
+                textContainer.appendChild(image);
+                textContainer.appendChild(englishText);
+                textContainer.appendChild(japaneseText);
+
+                const heading = document.querySelector('.highlighted-heading:nth-of-type(3)');
+                heading.insertAdjacentElement('afterend', textContainer);
+            }
+        }
+
+        function toggleLaserLightText() {
+            const existingText = document.querySelector('.laser-light-text');
+            if (existingText) {
+                existingText.remove();
+            } else {
+                const textContainer = document.createElement('div');
+                textContainer.className = 'laser-light-text';
+                textContainer.style.marginTop = '10px';
+                textContainer.style.padding = '10px';
+                textContainer.style.backgroundColor = '#f9f9f9';
+                textContainer.style.border = '1px solid #ddd';
+                textContainer.style.borderRadius = '5px';
+
+                const image = document.createElement('img');
+                image.src = 'laser.jpg';
+                image.alt = 'Laser';
+                image.style.display = 'block';
+                image.style.margin = '0 auto 10px';
+                image.style.maxWidth = '50%';
+                image.style.borderRadius = '8px';
+
+                const englishText = document.createElement('p');
+                englishText.textContent = `In our research, we are combining new tools that have not been used in the field of analytical chemistry with our independently developed laser light sources to study original analytical techniques. For example, the "dispersion-compensated high-finesse resonator" is a mechanism we proposed for the first time, which has the potential to dramatically improve the performance of analytical instruments. Through such approaches, we aim to develop cutting-edge analytical techniques using laser light. Furthermore, these methods can evolve into devices with unprecedented functions, such as modulating laser light at the world's fastest speed (introducing periodic changes).`;
+                englishText.style.marginBottom = '10px';
+
+                const japaneseText = document.createElement('p');
+                japaneseText.textContent = `これまで分析化学の分野では使われていなかった新しいツールと、独自に開発したレーザー光源を組み合わせて、オリジナルの分析技術を研究しています。例えば「分散補償型高フィネス共振器」は、私達が初めて提案した、分析機器の性能を飛躍的に向上する可能性のある仕組みです。このようなアプローチによって、レーザー光を利用した極限の分析技術の開発を目指しています。さらにこれらの手法は、分析技術のみならず、レーザー光を世界最高の速度で変調する(周期的な変化を与える)方法などの、これまでない機能を有するデバイスへの発展も可能です。`;
+
+                textContainer.appendChild(image);
+                textContainer.appendChild(englishText);
+                textContainer.appendChild(japaneseText);
+
+                const heading = document.querySelector('.highlighted-heading:nth-of-type(4)');
+                heading.insertAdjacentElement('afterend', textContainer);
+            }
+        }
+    </script>
+</body>
+</html>
